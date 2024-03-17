@@ -1,0 +1,122 @@
+<mxfile host="app.diagrams.net" modified="2024-03-17T23:39:15.088Z" agent="Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/122.0.0.0 Safari/537.36" etag="o_6i-zQ5nFvn_JysCxHG" version="23.1.5" type="device">
+  <diagram name="Page-1" id="cN2ZQ1pJpVs24Pwqs2Vj">
+    <mxGraphModel dx="2764" dy="2118" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="850" pageHeight="1100" math="0" shadow="0">
+      <root>
+        <mxCell id="0" />
+        <mxCell id="1" parent="0" />
+        <mxCell id="huWCSVCDS55-CS-_80Ni-5" value="" style="rounded=1;whiteSpace=wrap;html=1;" vertex="1" parent="1">
+          <mxGeometry x="89.5" y="-130" width="780.5" height="240" as="geometry" />
+        </mxCell>
+        <mxCell id="p8LwrQr4XJFd5S_BHjw_-35" value="" style="rounded=1;whiteSpace=wrap;html=1;" parent="1" vertex="1">
+          <mxGeometry x="89.5" y="140" width="780" height="440" as="geometry" />
+        </mxCell>
+        <mxCell id="p8LwrQr4XJFd5S_BHjw_-33" value="" style="image;sketch=0;aspect=fixed;html=1;points=[];align=center;fontSize=12;image=img/lib/mscae/Kubernetes.svg;" parent="1" vertex="1">
+          <mxGeometry x="820" y="130" width="62.5" height="60" as="geometry" />
+        </mxCell>
+        <mxCell id="DBuo7VZgZLoLimfe92VZ-2" value="" style="endArrow=none;html=1;rounded=0;exitX=0.005;exitY=0.63;exitDx=0;exitDy=0;exitPerimeter=0;" parent="1" edge="1">
+          <mxGeometry width="50" height="50" relative="1" as="geometry">
+            <mxPoint x="200.25" y="370.24" as="sourcePoint" />
+            <mxPoint x="-120" y="370" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="huWCSVCDS55-CS-_80Ni-1" value="" style="shape=actor;whiteSpace=wrap;html=1;" vertex="1" parent="1">
+          <mxGeometry x="-190" y="330" width="60" height="76" as="geometry" />
+        </mxCell>
+        <mxCell id="huWCSVCDS55-CS-_80Ni-2" value="User" style="text;html=1;align=center;verticalAlign=middle;resizable=0;points=[];autosize=1;strokeColor=none;fillColor=none;" vertex="1" parent="1">
+          <mxGeometry x="-185" y="406" width="50" height="30" as="geometry" />
+        </mxCell>
+        <mxCell id="huWCSVCDS55-CS-_80Ni-3" value="Kubernetes Cluster" style="text;html=1;align=center;verticalAlign=middle;resizable=0;points=[];autosize=1;strokeColor=none;fillColor=none;" vertex="1" parent="1">
+          <mxGeometry x="414.5" y="580" width="130" height="30" as="geometry" />
+        </mxCell>
+        <mxCell id="huWCSVCDS55-CS-_80Ni-4" value="" style="verticalLabelPosition=bottom;html=1;verticalAlign=top;align=center;strokeColor=none;fillColor=#00BEF2;shape=mxgraph.azure.cloud;" vertex="1" parent="1">
+          <mxGeometry x="810" y="-140" width="72.5" height="50" as="geometry" />
+        </mxCell>
+        <mxCell id="huWCSVCDS55-CS-_80Ni-6" value="Azure services" style="text;html=1;align=center;verticalAlign=middle;resizable=0;points=[];autosize=1;strokeColor=none;fillColor=none;" vertex="1" parent="1">
+          <mxGeometry x="429.75" y="-160" width="100" height="30" as="geometry" />
+        </mxCell>
+        <mxCell id="huWCSVCDS55-CS-_80Ni-7" value="Device db" style="shape=cylinder3;whiteSpace=wrap;html=1;boundedLbl=1;backgroundOutline=1;size=15;" vertex="1" parent="1">
+          <mxGeometry x="439.62" y="-60" width="80.25" height="100" as="geometry" />
+        </mxCell>
+        <mxCell id="huWCSVCDS55-CS-_80Ni-8" value="Data db" style="shape=cylinder3;whiteSpace=wrap;html=1;boundedLbl=1;backgroundOutline=1;size=15;" vertex="1" parent="1">
+          <mxGeometry x="680" y="-60" width="80" height="100" as="geometry" />
+        </mxCell>
+        <mxCell id="huWCSVCDS55-CS-_80Ni-9" value="" style="outlineConnect=0;dashed=0;verticalLabelPosition=bottom;verticalAlign=top;align=center;html=1;shape=mxgraph.aws3.classic_load_balancer;fillColor=#F58534;gradientColor=none;" vertex="1" parent="1">
+          <mxGeometry x="-10" y="334" width="69" height="72" as="geometry" />
+        </mxCell>
+        <mxCell id="huWCSVCDS55-CS-_80Ni-10" value="LoadBalancer (Prod)&lt;br&gt;NodePort (Dev)" style="text;html=1;align=center;verticalAlign=middle;resizable=0;points=[];autosize=1;strokeColor=none;fillColor=none;" vertex="1" parent="1">
+          <mxGeometry x="-40.5" y="410" width="130" height="40" as="geometry" />
+        </mxCell>
+        <mxCell id="huWCSVCDS55-CS-_80Ni-11" value="FrontEnd Service&lt;br&gt;Dashboard" style="rounded=0;whiteSpace=wrap;html=1;" vertex="1" parent="1">
+          <mxGeometry x="200" y="328" width="140" height="84" as="geometry" />
+        </mxCell>
+        <mxCell id="huWCSVCDS55-CS-_80Ni-12" value="Device management service" style="rounded=0;whiteSpace=wrap;html=1;" vertex="1" parent="1">
+          <mxGeometry x="409.75" y="240" width="140" height="84" as="geometry" />
+        </mxCell>
+        <mxCell id="huWCSVCDS55-CS-_80Ni-13" value="Data management service" style="rounded=0;whiteSpace=wrap;html=1;" vertex="1" parent="1">
+          <mxGeometry x="650" y="350" width="140" height="84" as="geometry" />
+        </mxCell>
+        <mxCell id="huWCSVCDS55-CS-_80Ni-14" value="" style="endArrow=classic;startArrow=classic;html=1;rounded=0;exitX=0.5;exitY=0;exitDx=0;exitDy=0;entryX=0;entryY=0.5;entryDx=0;entryDy=0;" edge="1" parent="1" source="huWCSVCDS55-CS-_80Ni-11" target="huWCSVCDS55-CS-_80Ni-12">
+          <mxGeometry width="50" height="50" relative="1" as="geometry">
+            <mxPoint x="500" y="250" as="sourcePoint" />
+            <mxPoint x="550" y="200" as="targetPoint" />
+            <Array as="points">
+              <mxPoint x="270" y="282" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="huWCSVCDS55-CS-_80Ni-15" value="" style="endArrow=classic;startArrow=classic;html=1;rounded=0;entryX=0;entryY=0.5;entryDx=0;entryDy=0;exitX=1;exitY=0.5;exitDx=0;exitDy=0;" edge="1" parent="1" source="huWCSVCDS55-CS-_80Ni-11" target="huWCSVCDS55-CS-_80Ni-13">
+          <mxGeometry width="50" height="50" relative="1" as="geometry">
+            <mxPoint x="500" y="250" as="sourcePoint" />
+            <mxPoint x="550" y="200" as="targetPoint" />
+            <Array as="points">
+              <mxPoint x="490" y="370" />
+              <mxPoint x="490" y="390" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="huWCSVCDS55-CS-_80Ni-16" value="" style="endArrow=classic;startArrow=classic;html=1;rounded=0;exitX=0.5;exitY=0;exitDx=0;exitDy=0;entryX=0.5;entryY=1;entryDx=0;entryDy=0;entryPerimeter=0;" edge="1" parent="1" source="huWCSVCDS55-CS-_80Ni-12" target="huWCSVCDS55-CS-_80Ni-7">
+          <mxGeometry width="50" height="50" relative="1" as="geometry">
+            <mxPoint x="610" y="230" as="sourcePoint" />
+            <mxPoint x="660" y="180" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="huWCSVCDS55-CS-_80Ni-17" value="" style="endArrow=classic;startArrow=classic;html=1;rounded=0;exitX=0.5;exitY=0;exitDx=0;exitDy=0;entryX=0.5;entryY=1;entryDx=0;entryDy=0;entryPerimeter=0;" edge="1" parent="1" source="huWCSVCDS55-CS-_80Ni-13" target="huWCSVCDS55-CS-_80Ni-8">
+          <mxGeometry width="50" height="50" relative="1" as="geometry">
+            <mxPoint x="610" y="230" as="sourcePoint" />
+            <mxPoint x="660" y="180" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="huWCSVCDS55-CS-_80Ni-18" value="Device management" style="text;html=1;align=center;verticalAlign=middle;resizable=0;points=[];autosize=1;strokeColor=none;fillColor=none;" vertex="1" parent="1">
+          <mxGeometry x="-140" y="-572" width="130" height="30" as="geometry" />
+        </mxCell>
+        <mxCell id="huWCSVCDS55-CS-_80Ni-19" value="Data&amp;nbsp; management" style="text;html=1;align=center;verticalAlign=middle;resizable=0;points=[];autosize=1;strokeColor=none;fillColor=none;" vertex="1" parent="1">
+          <mxGeometry x="845" y="-562" width="130" height="30" as="geometry" />
+        </mxCell>
+        <mxCell id="huWCSVCDS55-CS-_80Ni-22" value="User" style="swimlane;fontStyle=0;childLayout=stackLayout;horizontal=1;startSize=30;horizontalStack=0;resizeParent=1;resizeParentMax=0;resizeLast=0;collapsible=1;marginBottom=0;whiteSpace=wrap;html=1;" vertex="1" parent="1">
+          <mxGeometry x="-245" y="-660" width="140" height="60" as="geometry" />
+        </mxCell>
+        <mxCell id="huWCSVCDS55-CS-_80Ni-23" value="UserID" style="text;strokeColor=none;fillColor=none;align=left;verticalAlign=middle;spacingLeft=4;spacingRight=4;overflow=hidden;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;rotatable=0;whiteSpace=wrap;html=1;" vertex="1" parent="huWCSVCDS55-CS-_80Ni-22">
+          <mxGeometry y="30" width="140" height="30" as="geometry" />
+        </mxCell>
+        <mxCell id="huWCSVCDS55-CS-_80Ni-27" value="List" style="swimlane;fontStyle=0;childLayout=stackLayout;horizontal=1;startSize=30;horizontalStack=0;resizeParent=1;resizeParentMax=0;resizeLast=0;collapsible=1;marginBottom=0;whiteSpace=wrap;html=1;" vertex="1" parent="1">
+          <mxGeometry x="840" y="-680" width="140" height="90" as="geometry" />
+        </mxCell>
+        <mxCell id="huWCSVCDS55-CS-_80Ni-28" value="Item 1" style="text;strokeColor=none;fillColor=none;align=left;verticalAlign=middle;spacingLeft=4;spacingRight=4;overflow=hidden;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;rotatable=0;whiteSpace=wrap;html=1;" vertex="1" parent="huWCSVCDS55-CS-_80Ni-27">
+          <mxGeometry y="30" width="140" height="30" as="geometry" />
+        </mxCell>
+        <mxCell id="huWCSVCDS55-CS-_80Ni-29" value="Item 2" style="text;strokeColor=none;fillColor=none;align=left;verticalAlign=middle;spacingLeft=4;spacingRight=4;overflow=hidden;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;rotatable=0;whiteSpace=wrap;html=1;" vertex="1" parent="huWCSVCDS55-CS-_80Ni-27">
+          <mxGeometry y="60" width="140" height="30" as="geometry" />
+        </mxCell>
+        <mxCell id="huWCSVCDS55-CS-_80Ni-31" value="Device" style="swimlane;fontStyle=0;childLayout=stackLayout;horizontal=1;startSize=30;horizontalStack=0;resizeParent=1;resizeParentMax=0;resizeLast=0;collapsible=1;marginBottom=0;whiteSpace=wrap;html=1;" vertex="1" parent="1">
+          <mxGeometry x="-20" y="-690" width="140" height="90" as="geometry" />
+        </mxCell>
+        <mxCell id="huWCSVCDS55-CS-_80Ni-32" value="DeviceId" style="text;strokeColor=none;fillColor=none;align=left;verticalAlign=middle;spacingLeft=4;spacingRight=4;overflow=hidden;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;rotatable=0;whiteSpace=wrap;html=1;" vertex="1" parent="huWCSVCDS55-CS-_80Ni-31">
+          <mxGeometry y="30" width="140" height="30" as="geometry" />
+        </mxCell>
+        <mxCell id="huWCSVCDS55-CS-_80Ni-33" value="Item 2" style="text;strokeColor=none;fillColor=none;align=left;verticalAlign=middle;spacingLeft=4;spacingRight=4;overflow=hidden;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;rotatable=0;whiteSpace=wrap;html=1;" vertex="1" parent="huWCSVCDS55-CS-_80Ni-31">
+          <mxGeometry y="60" width="140" height="30" as="geometry" />
+        </mxCell>
+      </root>
+    </mxGraphModel>
+  </diagram>
+</mxfile>
