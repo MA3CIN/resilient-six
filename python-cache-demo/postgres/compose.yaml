@@ -1,11 +1,15 @@
-version: '3.1'
+version: "3.1"
 services:
   db:
     image: postgres
+    container_name: geo_db
     restart: always
     env_file:
       - postgres.env
-    volumes:
-      - ./geolocation_db.sql
+    volumes: #1st one is the db on local machine, 2nd one is the INIT
+      - .//geo_db_init_postgres.sql:/docker-entrypoint-initdb.d/init.sql
+      # this makes a local volume of the whole db. optional!
+      # - .//postgres/data:/var/lib/postgresql/data
     ports:
       - 5432:5432
+      #1st one can be changes - port mapping
