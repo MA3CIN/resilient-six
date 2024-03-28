@@ -1,0 +1,21 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: infrastructure-service-deployment
+  labels:
+    app: infra-deploy
+spec:
+  replicas: 3
+  selector:
+    matchLabels:
+      app: infra-deploy
+  template:
+    metadata:
+      labels:
+        app: infra-deploy
+    spec:
+      containers:
+      - name: nginx
+        image: marcinziolkowski/infra-service:v1.0.1
+        ports:
+        - containerPort: 80

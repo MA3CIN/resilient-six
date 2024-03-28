@@ -1,0 +1,33 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: geolocation-service-deployment
+  labels:
+    app: geo-deploy
+spec:
+  replicas: 3
+  selector:
+    matchLabels:
+      app: geo-deploy
+  template:
+    metadata:
+      labels:
+        app: geo-deploy
+    spec:
+      containers:
+      - name: nginx
+        image: marcinziolkowski/geo-service:v1.0.1
+        ports:
+        - containerPort: 80
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: geo-service
+spec:
+  selector:
+    app: geo-deploy
+  ports:
+    - protocol: TCP
+      port: 8080
+      targetPort: 80
