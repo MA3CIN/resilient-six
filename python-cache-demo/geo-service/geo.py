@@ -1,10 +1,13 @@
 import requests
 import requests_cache
+import os
 from requests_cache import CachedSession
 
 from flask import Flask
 
-infra_svc_endpoint_address = 'http://127.0.0.1:5000/'
+INFRA_URL = os.getenv('INFRA_URI', 'http://127.0.0.1:3000/') 
+DB_URL = os.getenv('DB_URL', 'http://127.0.0.1:3000/') 
+
 # invalidate cache after 1 hour
 session = CachedSession('infra_owners_cache', backend='sqlite', expire_after=3600)
 
@@ -20,12 +23,12 @@ def get_location_for_gate():
 #invalidate cache if you have a serial number without a corresponding cached owner 
 #with cache enabled
 def get_owners():
-   if (infra_svc_endpoint_address in session.cache.urls()):
+   if (INFRA_URL in session.cache.urls()):
       print("gotten from cache")
    else:
       print("gotten manually")
-   return session.get(infra_svc_endpoint_address)
+   return session.get(INFRA_URL)
 
 
 if __name__ == '__main__':
-    app.run(port=6000)
+    app.run(host='0.0.0.0', port=4000)
