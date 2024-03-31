@@ -19,16 +19,14 @@ def get_random_number():
     return str(random.randint(1, 100))
 
 @app.route('/db', methods=['GET'])
-def get_random_number():
+def get_data_from_db():
     mycursor = mydb.cursor()
 
-    mycursor.execute("SELECT name, address FROM customers")
+    mycursor.execute("SHOW TABLES")
 
     myresult = mycursor.fetchall()
 
-    for x in myresult:
-        print(x)
-    return str(10)
+    return str(myresult)
 
 if __name__ == '__main__':
     app.run(host='0.0.0.0', port=3000)
