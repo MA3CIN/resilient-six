@@ -10,7 +10,7 @@ services:
       - "3000:3000"
     environment:
       FLASK_RUN_PORT: 3000
-      DB_URL: postgres://todoapp@postgres/todos
+      DB_URL: http://infra_db:3306
   stats:
     build: ./stats-service/.
     container_name: stats
@@ -22,7 +22,7 @@ services:
     environment:
       FLASK_RUN_PORT: 5000
       INFRA_URL: http://infra:3000/
-      DB_URL: postgres://todoapp@postgres/todos
+      DB_URL: http://stats_db:3306
   geo:
     build: ./geo-service/.
     container_name: geo
@@ -34,7 +34,7 @@ services:
     environment:
       FLASK_RUN_PORT: 4000
       INFRA_URL: http://infra:3000/
-      DB_URL: postgres://todoapp@postgres/todos
+      DB_URL: http://geo_db:3306
   infra_db:
     container_name: infra_db
     image: mysql
