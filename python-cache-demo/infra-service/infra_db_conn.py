@@ -3,7 +3,8 @@ import logging
 
 class InfraDBConnector:
     def __init__(self, host, user, pwd, database="devices", logger=logging.Logger(__name__)):
-        logger.info(f"Connecting to the database {database} on the host: {host}.")
+        self.logger = logger
+        self.logger.info(f"Connecting to the database {database} on the host: {host}.")
         try:
             self.db_conn = mysql.connector.connect(
                 host=host,
@@ -12,9 +13,9 @@ class InfraDBConnector:
                 database=database
                 )
             self.cursor = self.db_conn.cursor()
-            logger.info(f"Connection to database {database} established successfully.")
+            self.logger.info(f"Connection to database {database} established successfully.")
         except Exception as e:
-            logger.error(f"Cannot connect with database {database} on {host}. Error: {e}.")
+            self.logger.error(f"Cannot connect to database {database} on {host}. Error: {e}.")
             raise
 
     def add_device(self, owner, model, x_pos, y_pos):
@@ -26,6 +27,16 @@ class InfraDBConnector:
         stmt = "INSERT INTO registered_devices (owner, model, x_position, y_position) VALUES (%s, %s, %s, %s)"
         self.cursor.execute(stmt, (owner, model_id, x_pos, y_pos))
         self.db_conn.commit()
+
+    def get_device(self, device_id):
+        self.logger.info(f"Getting information about device {device_id}.")
+        try:
+            stmt="SELECT * FROM registered_devices WHERE id=%s"
+            self.cursor.execute(stmt, (device_id, ))
+        except Exception as e:
+            self.logger.error(f"Cannot fetch devices {device_id} information. Error: {e}.")
+            raise
+        return self.cursor.fetchone()
 
     def get_users_devices(self, owner):
         stmt = "SELECT * FROM registered_devices WHERE owner=%s"
