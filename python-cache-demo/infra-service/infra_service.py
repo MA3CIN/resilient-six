@@ -1,12 +1,19 @@
 from infra_db_conn import InfraDBConnector
 from flask import Flask, request, jsonify
 import logging
+import os
 
 app = Flask(__name__)
 
 logger = logging.Logger(__name__)
 
-db = InfraDBConnector("localhost", "test_user", "123456", "devices")
+DB_URL = os.getenv('DB_URL', 'http://127.0.0.1:3306/') 
+db = InfraDBConnector(
+  host=DB_URL,
+  user="test_user",
+  pwd="123456",
+  database="devices"
+)
 
 @app.route('/devices', methods=['GET'])
 def get_all_registered_devices():
@@ -73,4 +80,4 @@ def register_device():
     return jsonify(success=True)
 
 if __name__ == '__main__':
-    app.run(port=5000)
+    app.run(host='0.0.0.0', port=3000)
