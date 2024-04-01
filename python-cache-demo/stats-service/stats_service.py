@@ -12,8 +12,8 @@ infra_svc_endpoint_address = os.getenv('INFRA_URI', 'http://127.0.0.1:3000/')
 
 # db = StatisticsDBConnector(
 #   host="localhost",
-#   user="test_user",
-#   pwd="123456",
+#   user="root",
+#   pwd="mysql",
 #   database="statistics"
 # )
 

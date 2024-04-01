@@ -10,8 +10,8 @@ logger = logging.Logger(__name__)
 DB_URL = os.getenv('DB_URL', 'http://127.0.0.1:3306/') 
 db = InfraDBConnector(
   host=DB_URL,
-  user="test_user",
-  pwd="123456",
+  user="root",
+  pwd="mysql",
   database="devices"
 )
 
