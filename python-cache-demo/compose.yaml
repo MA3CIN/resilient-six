@@ -5,36 +5,39 @@ services:
     container_name: infra
     stop_signal: SIGINT
     depends_on:
-      - infra_db
+      infra_db:
+        condition: service_healthy
     ports:
       - "3000:3000"
     environment:
       FLASK_RUN_PORT: 3000
-      DB_URL: postgres://todoapp@postgres/todos
+      DB_URL: infra_db
   stats:
     build: ./stats-service/.
     container_name: stats
     stop_signal: SIGINT
     depends_on:
-      - stats_db
+      stats_db:
+        condition: service_healthy
     ports:
       - "5000:5000"
     environment:
       FLASK_RUN_PORT: 5000
       INFRA_URL: http://infra:3000/
-      DB_URL: postgres://todoapp@postgres/todos
+      DB_URL: http://stats_db
   geo:
     build: ./geo-service/.
     container_name: geo
     stop_signal: SIGINT
     depends_on:
-      - geo_db
+      geo_db:
+        condition: service_healthy
     ports:
       - "4000:4000"
     environment:
       FLASK_RUN_PORT: 4000
       INFRA_URL: http://infra:3000/
-      DB_URL: postgres://todoapp@postgres/todos
+      DB_URL: http://geo_db
   infra_db:
     container_name: infra_db
     image: mysql
@@ -43,6 +46,11 @@ services:
     environment:
       - MYSQL_ROOT_PASSWORD=mysql
       - MYSQL_DATABASE=db
+    healthcheck:
+      test: "/usr/bin/mysql --user=root --password=$$MYSQL_ROOT_PASSWORD --execute \"SHOW DATABASES;\""
+      interval: 3s
+      timeout: 30s
+      retries: 10    
     volumes:
       - .//infra-service/infra_db_init_mysql.sql:/docker-entrypoint-initdb.d/init.sql
   geo_db:
@@ -53,6 +61,11 @@ services:
     environment:
       - MYSQL_ROOT_PASSWORD=mysql
       - MYSQL_DATABASE=db
+    healthcheck:
+      test: "/usr/bin/mysql --user=root --password=$$MYSQL_ROOT_PASSWORD --execute \"SHOW DATABASES;\""
+      interval: 3s
+      timeout: 30s
+      retries: 10  
     volumes:
       - .//geo-service/geo_db_init_mysql.sql:/docker-entrypoint-initdb.d/init.sql
   stats_db:
@@ -63,5 +76,10 @@ services:
     environment:
       - MYSQL_ROOT_PASSWORD=mysql
       - MYSQL_DATABASE=db
+    healthcheck:
+      test: "/usr/bin/mysql --user=root --password=$$MYSQL_ROOT_PASSWORD --execute \"SHOW DATABASES;\""
+      interval: 3s
+      timeout: 30s
+      retries: 10  
     volumes:
       - .//stats-service/stats_db_init_mysql.sql:/docker-entrypoint-initdb.d/init.sql
