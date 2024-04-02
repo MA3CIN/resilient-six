@@ -28,3 +28,24 @@ snyk monitor --all-projects --org=<ORG_ID>
 # for containers
 snyk container monitor <repository>:<tag> --org=<ORG_ID>
 ```
+
+**Usage example:**
+```shell
+(base) ➜  python-cache-demo git:(vuln-scanning) snyk code test
+
+Testing /path/resilient-six/python-cache-demo ...
+
+
+✔ Test completed
+
+Organization:      jgorczynski
+Test type:         Static code analysis
+Project path:      /path/resilient-six/python-cache-demo
+
+Summary:
+
+✔ Awesome! No issues were found.
+
+
+(base) ➜  python-cache-demo git:(vuln-scanning) ✗ 
+```
