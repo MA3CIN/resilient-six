@@ -5,7 +5,7 @@ metadata:
   labels:
     app: infra-deploy
 spec:
-  replicas: 3
+  replicas: 1
   selector:
     matchLabels:
       app: infra-deploy
@@ -15,10 +15,10 @@ spec:
         app: infra-deploy
     spec:
       containers:
-      - name: nginx
-        image: marcinziolkowski/infra-service:v1.0.1
-        ports:
-        - containerPort: 80
+        - name: nginx
+          image: marcinziolkowski/infra-service:v1.0.1
+          ports:
+            - containerPort: 80
 ---
 apiVersion: v1
 kind: Service
