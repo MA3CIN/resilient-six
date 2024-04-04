@@ -19,6 +19,9 @@ spec:
           image: marcinziolkowski/infra-service:v1.0.1
           ports:
             - containerPort: 80
+          env:
+            - name: FLASK_RUN_PORT
+              value: "3000"
           resources:
             limits:
               memory: "128Mi"

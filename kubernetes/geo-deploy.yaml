@@ -17,6 +17,9 @@ spec:
       containers:
         - name: nginx
           image: marcinziolkowski/geo-service:v1.0.1
+          env:
+            - name: FLASK_RUN_PORT
+              value: "4000"
           ports:
             - containerPort: 80
           resources:
