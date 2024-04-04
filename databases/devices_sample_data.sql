@@ -16,30 +16,30 @@ INSERT INTO Devices_Categories (name) VALUES ('smart door bell');
 COMMIT;
 
 -- for Prime Sensors
-INSERT INTO Models (manufacturer, category, name) VALUES (1, 1, 'PS-T-Sensor-01');
-INSERT INTO Models (manufacturer, category, name) VALUES (1, 1, 'PS-T-Sensor-02');
-INSERT INTO Models (manufacturer, category, name) VALUES (1, 2, 'PS-T-Pred-A01');
-INSERT INTO Models (manufacturer, category, name) VALUES (1, 2, 'PS-T-Pred-A02');
-INSERT INTO Models (manufacturer, category, name) VALUES (1, 3, 'PS-Rain-Sensor-R01');
-INSERT INTO Models (manufacturer, category, name) VALUES (1, 3, 'PS-Rain-Sensor-R01 Pro');
-INSERT INTO Models (manufacturer, category, name) VALUES (1, 4, 'PS-Rain-Pred-RP01');
-INSERT INTO Models (manufacturer, category, name) VALUES (1, 4, 'PS-Rain-Pred-RP01 Pro');
-INSERT INTO Models (manufacturer, category, name) VALUES (1, 5, 'PS-M-Sensor-M01');
-INSERT INTO Models (manufacturer, category, name) VALUES (1, 6, 'PS-Door-Bell-SDB01');
+INSERT INTO Models (manufacturer, category, name, energy_consumption) VALUES (1, 1, 'PS-T-Sensor-01', 0.5);
+INSERT INTO Models (manufacturer, category, name, energy_consumption) VALUES (1, 1, 'PS-T-Sensor-02', 0.5);
+INSERT INTO Models (manufacturer, category, name, energy_consumption) VALUES (1, 2, 'PS-T-Pred-A01', 1);
+INSERT INTO Models (manufacturer, category, name, energy_consumption) VALUES (1, 2, 'PS-T-Pred-A02', 1);
+INSERT INTO Models (manufacturer, category, name, energy_consumption) VALUES (1, 3, 'PS-Rain-Sensor-R01', 2);
+INSERT INTO Models (manufacturer, category, name, energy_consumption) VALUES (1, 3, 'PS-Rain-Sensor-R01 Pro', 2);
+INSERT INTO Models (manufacturer, category, name, energy_consumption) VALUES (1, 4, 'PS-Rain-Pred-RP01', 1.5);
+INSERT INTO Models (manufacturer, category, name, energy_consumption) VALUES (1, 4, 'PS-Rain-Pred-RP01 Pro', 1.5);
+INSERT INTO Models (manufacturer, category, name, energy_consumption) VALUES (1, 5, 'PS-M-Sensor-M01', 1);
+INSERT INTO Models (manufacturer, category, name, energy_consumption) VALUES (1, 6, 'PS-Door-Bell-SDB01', 1);
 
 -- for iHome IoT
-INSERT INTO Models (manufacturer, category, name) VALUES (2, 1, 'iTemperature 10');
-INSERT INTO Models (manufacturer, category, name) VALUES (2, 1, 'iTemperature 20');
-INSERT INTO Models (manufacturer, category, name) VALUES (2, 2, 'iTemperaturePreditor 10');
-INSERT INTO Models (manufacturer, category, name) VALUES (2, 2, 'iTemperaturePreditor 10');
-INSERT INTO Models (manufacturer, category, name) VALUES (2, 3, 'iRainfall 10 Fluid');
-INSERT INTO Models (manufacturer, category, name) VALUES (2, 3, 'iRainfall 20 Fluid');
-INSERT INTO Models (manufacturer, category, name) VALUES (2, 4, 'iRainfallPredictor 10 Pro');
-INSERT INTO Models (manufacturer, category, name) VALUES (2, 4, 'iRainfallPredictor 20 Pro');
+INSERT INTO Models (manufacturer, category, name, energy_consumption) VALUES (2, 1, 'iTemperature 10', 0.75);
+INSERT INTO Models (manufacturer, category, name, energy_consumption) VALUES (2, 1, 'iTemperature 20', 1.75);
+INSERT INTO Models (manufacturer, category, name, energy_consumption) VALUES (2, 2, 'iTemperaturePreditor 10', 2);
+INSERT INTO Models (manufacturer, category, name, energy_consumption) VALUES (2, 2, 'iTemperaturePreditor 10', 2.25);
+INSERT INTO Models (manufacturer, category, name, energy_consumption) VALUES (2, 3, 'iRainfall 10 Fluid', 1.5);
+INSERT INTO Models (manufacturer, category, name, energy_consumption) VALUES (2, 3, 'iRainfall 20 Fluid', 1);
+INSERT INTO Models (manufacturer, category, name, energy_consumption) VALUES (2, 4, 'iRainfallPredictor 10 Pro', 5);
+INSERT INTO Models (manufacturer, category, name, energy_consumption) VALUES (2, 4, 'iRainfallPredictor 20 Pro', 5);
 
 -- for DYI Systems
-INSERT INTO Models (manufacturer, category, name) VALUES (3, 5, 'MS M01AB100');
-INSERT INTO Models (manufacturer, category, name) VALUES (3, 6, 'SDB S01CD200');
+INSERT INTO Models (manufacturer, category, name, energy_consumption) VALUES (3, 5, 'MS M01AB100', 3);
+INSERT INTO Models (manufacturer, category, name, energy_consumption) VALUES (3, 6, 'SDB S01CD200', 3);
 COMMIT;
 
 INSERT INTO Metrics (name) VALUES ('temperature [C]');

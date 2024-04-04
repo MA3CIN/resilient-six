@@ -18,6 +18,7 @@ CREATE TABLE Models (
 	id INT AUTO_INCREMENT PRIMARY KEY
 	, manufacturer INT NOT NULL
 	, category INT NOT NULL
+    , energy_consumption FLOAT NOT NULL
 	, name VARCHAR(200) NOT NULL
 	, comments VARCHAR(1000)
 );
