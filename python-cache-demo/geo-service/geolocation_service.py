@@ -1,5 +1,5 @@
 from geolocation_db_conn import GeolocationDBConnector
-from flask import Flask
+from flask import Flask, request, jsonify
 import logging
 import os
 from requests_cache import CachedSession
@@ -23,23 +23,42 @@ db = GeolocationDBConnector(
   database="geolocation"
 )
 
-@app.route('/devices', methods=['GET'])
-def get_all_registered_devices():
-    """
-    Get all registered devices.
-    """
-    logger.info("Getting all registered devices.")
-    return db.get_all_registered_devices()
 
-@app.route('/devices/position/<int:device_id>', methods=['GET'])
+@app.route('/positions/<int:device_id>', methods=['GET'])
 def get_device_position(device_id):
     """
-    Get all registered devices.
+    Get position of given device.
     """
-    logger.info(f"Getting information about device {device_id}.")
-    device = db.get_device(device_id)
-    response_dict = {"pos_x": device[3], "pos_y": device[4]}
+    logger.info(f"Getting positions about device {device_id}.")
+    pos_x, pos_y = db.get_position(device_id)
+    response_dict = {"pos_x": pos_x, "pos_y": pos_y}
+    logger.info(f"Device's {device_id} position: x={pos_x}, y={pos_y}")
     return response_dict
+
+@app.route('/positions', methods=['POST'])
+def add_new_device_position():
+    """
+    Add new device's position.
+    Required input:
+      device_id (int): id of the device
+      pos_x (float): position x of the device
+      pos_y (float): position y of the device
+    """
+    data = request.get_json()
+    try:
+      device_id = int(data["device_id"])
+      pos_x = float(data["pos_x"])
+      pos_y = float(data["pos_y"])
+    except Exception as e:
+        logger.error("Incorrect data provided for adding position to device. Error: {e}.")
+        raise
+    try:
+      db.add_device_position(device_id, pos_x, pos_y)
+      logger.info(f"Position to device with id {device_id} added successfully.")
+    except Exception as e:
+      logger.error(f"Error when adding new position to device. Error: {e}.")
+      raise
+    return jsonify(success=True)
 
 # @app.route('/', methods=['GET'])
 # def get_location_for_gate():

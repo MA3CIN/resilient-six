@@ -23,3 +23,13 @@ class StatisticsDBConnector:
         self.cursor.execute(stmt)
         return self.cursor.fetchall()
     
+    def get_metric(self, metric_id):
+        stmt = "SELECT * from metrics WHERE id=(%s)"
+        self.cursor.execute(stmt, (metric_id, ))
+        return self.cursor.fetchone()
+
+    # def get_device_all_metrics(self, device_id):
+    #     # TODO: clarify if a metric value is assigned to particular model or maybe single device
+    #     stmt = "SELECT metric_id FROM models_metrics WHERE model_id=(%s)"
+    #     self.cursor.execute(stmt, (device_id, ))
+    #     return self.cursor.fetchall()

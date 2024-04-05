@@ -27,3 +27,21 @@
    Get calculated energy consumption for all devices from provided model.
   Params:
   - model_name (str): name of the model
+
+#### Geo-service
+
+- [GET] /positions/\<int:device_id\> \
+  Get position of given device.
+  Params:
+  - device_id (int): id of the device
+- [POST] /positions \
+  Add new device's position.
+  Params:
+  - device_id (int): id of the existing device
+  - pos_x (float): position x of the device
+  - pos_y (float): position y of the device
+
+#### Stats-service
+
+- [GET] /metrics \
+  Get all available metrics.
