@@ -5,7 +5,7 @@ metadata:
   labels:
     app: stats-deploy
 spec:
-  replicas: 3
+  replicas: 1
   selector:
     matchLabels:
       app: stats-deploy
@@ -15,10 +15,11 @@ spec:
         app: stats-deploy
     spec:
       containers:
-      - name: stats
-        image: marcinziolkowski/stats-service:v1.0.1
-        ports:
-        - containerPort: 80
+        - name: stats
+          # docker.io/marcinziolkowski/stats-service:v1.0.1
+          image: marcinziolkowski/stats-service:v1.0.1
+          ports:
+            - containerPort: 80
 ---
 apiVersion: v1
 kind: Service
