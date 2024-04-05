@@ -18,38 +18,84 @@ class InfraDBConnector:
             self.logger.error(f"Cannot connect to database {database} on {host}. Error: {e}.")
             raise
 
-    def add_device(self, owner, model, x_pos, y_pos):
+    def get_all_registered_devices(self):
+        stmt = "SELECT * FROM registered_devices"
+        self.cursor.execute(stmt)
+        return self.cursor.fetchall()
+
+    def add_device(self, owner, model):
         if isinstance(model, str):
             self.cursor.execute("SELECT id FROM models WHERE name=%s", model)
             model_id = self.cursor.fetchone()
         else:
             model_id=model
-        stmt = "INSERT INTO registered_devices (owner, model, x_position, y_position) VALUES (%s, %s, %s, %s)"
-        self.cursor.execute(stmt, (owner, model_id, x_pos, y_pos))
-        self.db_conn.commit()
-
-    def get_device(self, device_id):
-        self.logger.info(f"Getting information about device {device_id}.")
+        stmt = "INSERT INTO registered_devices (owner, model) VALUES (%s, %s)"
         try:
-            stmt="SELECT * FROM registered_devices WHERE id=%s"
-            self.cursor.execute(stmt, (device_id, ))
+            self.cursor.execute(stmt, (owner, model_id))
+            self.db_conn.commit()
         except Exception as e:
-            self.logger.error(f"Cannot fetch devices {device_id} information. Error: {e}.")
+            self.logger.error(f"Cannot register new device. Error: {e}")
             raise
-        return self.cursor.fetchone()
 
-    def get_users_devices(self, owner):
-        stmt = "SELECT * FROM registered_devices WHERE owner=%s"
-        self.cursor.execute(stmt, (owner, ))
-        return self.cursor.fetchall()
-
-    def get_all_registered_devices(self):
-        stmt = "SELECT * FROM registered_devices"
-        self.cursor.execute(stmt)
-        return self.cursor.fetchall()
-    
     def get_all_models(self):
         stmt = "SELECT * FROM models"
         self.cursor.execute(stmt)
         return self.cursor.fetchall()
+    
+    def add_model(self, category, name, energy_cons):
+        self.logger.info(f"Adding new model {name}.")
+        stmt = "INSERT INTO models (category, name, energy_consumption) VALUES (%s, %s, %s)"
+        try:
+            self.cursor.execute(stmt, (category, name, energy_cons))
+            self.db_conn.commit()
+        except Exception as e:
+            self.logger.error(f"Cannot add new model. Error: {e}")
+            raise
+
+    def get_all_categories(self):
+        stmt = "SELECT * FROM categories"
+        self.cursor.execute(stmt)
+        return self.cursor.fetchall()
+    
+    def add_category(self, name):
+        self.logger.info(f"Adding new category {name}.")
+        stmt = "INSERT INTO devices_categories (name) VALUES (%s)"
+        try:
+            self.cursor.execute(stmt, (name, ))
+            self.db_conn.commit()
+        except Exception as e:
+            self.logger.error(f"Cannot add new category. Error: {e}")
+            raise
+
+    def get_model_id(self, model_name):
+        self.cursor.execute("SELECT id FROM models WHERE name=%s", model_name)
+        return self.cursor.fetchone()
+
+    def get_devices_per_model(self, model_id):
+        stmt = "SELECT * FROM registered_devices WHERE model=(%s)"
+        self.cursor.execute(stmt, (model_id, ))
+        return self.cursor.fetchall()
+    
+    def get_model_energy(self, model_id):
+        self.cursor.execute("SELECT energy_consumption FROM models WHERE id=%s", model_id)
+        return self.cursor.fetchone()
+
+    # def get_device(self, device_id):
+    #     self.logger.info(f"Getting information about device {device_id}.")
+    #     try:
+    #         stmt="SELECT * FROM registered_devices WHERE id=%s"
+    #         self.cursor.execute(stmt, (device_id, ))
+    #     except Exception as e:
+    #         self.logger.error(f"Cannot fetch devices {device_id} information. Error: {e}.")
+    #         raise
+    #     return self.cursor.fetchone()
+
+    # def get_users_devices(self, owner):
+    #     stmt = "SELECT * FROM registered_devices WHERE owner=%s"
+    #     self.cursor.execute(stmt, (owner, ))
+    #     return self.cursor.fetchall()
+
+
+    
+
     
