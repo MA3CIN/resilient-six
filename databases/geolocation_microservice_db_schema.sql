@@ -6,20 +6,30 @@ CREATE TABLE Users(
 	, comments VARCHAR(1000)
 );
 
+# this table will be cached in statistics microservice
 CREATE TABLE Registered_Devices (
 	id INT AUTO_INCREMENT PRIMARY KEY
--- 	, model INT NOT NULL -- need to think whether we need it or not
+	, model INT NOT NULL
 	, owner INT NOT NULL
 	, x_position FLOAT
 	, y_position FLOAT
 	, comments VARCHAR(1000)	
 );
-
--- need to think whether we need it or not
--- ALTER TABLE Registered_Devices
--- 	ADD CONSTRAINT regdev_mod_fk
--- 	FOREIGN KEY (model) REFERENCES Models(id);
 	
 ALTER TABLE Registered_Devices
 	ADD CONSTRAINT regdev_user_fk
 	FOREIGN KEY (owner) REFERENCES Users(id);
+
+
+CREATE TABLE Devices_Locations (
+    device_id INT
+    , timestamp TIMESTAMP DEFAULT CURRENT_TIMESTAMP  # if we need to serve a location history
+	, x_position FLOAT
+	, y_position FLOAT
+    , comments VARCHAR(1000)
+    , PRIMARY KEY (device_id, timestamp)
+);
+
+ALTER TABLE Devices_Locations
+    ADD CONSTRAINT devloc_regdev_fk
+    FOREIGN KEY (device_id) REFERENCES Registered_Devices(id);
