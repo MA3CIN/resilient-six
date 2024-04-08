@@ -22,6 +22,11 @@ class InfraDBConnector:
         stmt = "SELECT * FROM registered_devices"
         self.cursor.execute(stmt)
         return self.cursor.fetchall()
+    
+    def get_owners_devices(self, owner_id):
+        stmt = "SELECT * FROM registered_devices WHERE owner=(%s)"
+        self.cursor.execute(stmt, (owner_id, ))
+        return self.cursor.fetchall()
 
     def add_device(self, owner, model):
         if isinstance(model, str):

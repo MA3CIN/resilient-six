@@ -24,6 +24,16 @@ def get_all_registered_devices():
     logger.info("Getting all registered devices.")
     return db.get_all_registered_devices()
 
+@app.route('/devices/<id:owner_id>', methods=['GET'])
+def get_owners_devices(owner_id):
+    """
+    Get all registered devices belonging to particular user.
+    Required input:
+      user_id (int): id of the owner
+    """
+    logger.info(f"Getting devices registered for {owner_id}.")
+    return db.get_owners_devices(owner_id)
+
 @app.route('/devices', methods=['POST'])
 def register_device():
     """

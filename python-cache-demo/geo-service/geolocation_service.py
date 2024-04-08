@@ -13,8 +13,8 @@ logger = logging.Logger(__name__)
 # invalidate cache after 1 hour
 session = CachedSession('infra_owners_cache', backend='sqlite', expire_after=3600)
 
-INFRA_URL = os.getenv('INFRA_URI', 'http://127.0.0.1:3000/') 
-DB_URL = os.getenv('DB_URL', 'http://127.0.0.1:3000/') 
+INFRA_URL = os.getenv('INFRA_URI', 'http://127.0.0.1:3000') 
+DB_URL = os.getenv('DB_URL', 'http://127.0.0.1:3000') 
 
 db = GeolocationDBConnector(
   host=DB_URL,
@@ -59,6 +59,28 @@ def add_new_device_position():
       logger.error(f"Error when adding new position to device. Error: {e}.")
       raise
     return jsonify(success=True)
+
+@app.route('/positions/recommend/<int:owner_id>', methods=['GET'])
+def get_recommended_position(owner_id):
+    """
+    Get recommended position for owner's device.
+    Calculated as:
+    - x_pos: average of x_positions from all user's devices
+    - y_pos: average of y_positions from all user's devices
+    Simulates some more complex computations.
+    """
+    logger.info(f"Getting devices for {owner_id}.")
+    api_url = f"{INFRA_URL}/devices/{owner_id}"
+    devices = requests.get(api_url)
+    all_x, all_y = 0, 0
+    for device in devices:
+      x_pos, y_pos = db.get_position(device["device_id"])
+      all_x += x_pos
+      all_y+=y_pos
+    x_pos = all_x/len(devices)
+    y_pos=all_y/len(devices)
+    logger.info(f"Recommendation created: (x_pos={x_pos}, y_pos={y_pos})")
+    return (x_pos, y_pos)
 
 # @app.route('/', methods=['GET'])
 # def get_location_for_gate():
