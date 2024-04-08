@@ -1,5 +1,5 @@
-CREATE DATABASE IF NOT EXISTS statistics_microservice;
-use statistics_microservice;
+CREATE DATABASE IF NOT EXISTS statistics;
+use statistics;
 -- it seems that a copy of the devices DB might be the best option here
 
 # this table will be cached in statistics microservice

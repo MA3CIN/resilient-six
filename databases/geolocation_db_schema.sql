@@ -1,5 +1,5 @@
-CREATE DATABASE IF NOT EXISTS geolocation_microservice;
-use geolocation_microservice;
+CREATE DATABASE IF NOT EXISTS geolocation;
+use geolocation;
 
 CREATE TABLE Users(
 	id INT AUTO_INCREMENT PRIMARY KEY
