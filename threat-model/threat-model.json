@@ -1,0 +1,31 @@
+{
+  "version": "2.2.0",
+  "summary": {
+    "title": "Threat model for Kubernetes high availability demo",
+    "owner": "Jakub Gorczynski",
+    "description": "Application in a cloud on at least 3 simple types of microservices\n Assumptions - \nautomation in infrastructure build and and setup – usage of a tools like Terraform, AWS CDK, Ansible, Chef, Puppet, etc - \ncontrol version system usage, like git, -\n at least three types of microservices, - \ndatabase and state should be specific and owned by each microservice type separately, but it is required for exactly two types of microservices to have its own private mirror or cache of some subset of data/state owned as authoritative by other microservice type, to be used in scenarios when the strictly integral copy of these data subset is not necessary. \nWhen the strict integrity for foreign data is still necessary, data should be reached by direct requests to the microservice owner of these data instead of usage of any local mirror or cache, -\n authorization and session management, -\n identities: administrator + identities federated via OAuth, for example with Google accounts, - user interface GUI (if you have any team member frontend oriented) - \nmonitoring of the service,\n collecting all the logs -\n",
+    "id": 0
+  },
+  "detail": {
+    "contributors": [
+      {
+        "name": "Jakub Gorczynski"
+      }
+    ],
+    "diagrams": [
+      {
+        "id": 0,
+        "title": "resilient-six-stride",
+        "diagramType": "STRIDE",
+        "placeholder": "New STRIDE diagram description",
+        "thumbnail": "./public/content/images/thumbnail.stride.jpg",
+        "version": "2.2.0",
+        "cells": [],
+        "description": "threat model of the service (using STRIDE framework)"
+      }
+    ],
+    "diagramTop": 1,
+    "reviewer": "Marcin Ziolkowski, Mateusz Wasilewski",
+    "threatTop": 0
+  }
+}
