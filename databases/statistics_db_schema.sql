@@ -42,6 +42,10 @@ CREATE TABLE Registered_Devices (
 	, comments VARCHAR(1000)	
 );
 
+ALTER TABLE Registered_Devices
+	ADD CONSTRAINT regdev_mod_fk
+	FOREIGN KEY (model) REFERENCES Models(id);
+
 
 CREATE TABLE Observed_Values (
     device_id INT NOT NULL
