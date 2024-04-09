@@ -47,18 +47,18 @@ class InfraDBConnector:
         self.cursor.execute(stmt)
         return self.cursor.fetchall()
     
-    def add_model(self, category, name, energy_cons):
+    def add_model(self, category, manufacturer, name, energy_cons):
         self.logger.info(f"Adding new model {name}.")
-        stmt = "INSERT INTO models (category, name, energy_consumption) VALUES (%s, %s, %s)"
+        stmt = "INSERT INTO models (category, manufacturer, name, energy_consumption) VALUES (%s, %s, %s, %s)"
         try:
-            self.cursor.execute(stmt, (category, name, energy_cons))
+            self.cursor.execute(stmt, (category, manufacturer, name, energy_cons))
             self.db_conn.commit()
         except Exception as e:
             self.logger.error(f"Cannot add new model. Error: {e}")
             raise
 
     def get_all_categories(self):
-        stmt = "SELECT * FROM categories"
+        stmt = "SELECT * FROM devices_categories"
         self.cursor.execute(stmt)
         return self.cursor.fetchall()
     
@@ -73,7 +73,7 @@ class InfraDBConnector:
             raise
 
     def get_model_id(self, model_name):
-        self.cursor.execute("SELECT id FROM models WHERE name=%s", model_name)
+        self.cursor.execute("SELECT id FROM models WHERE name=%s", (model_name, ))
         return self.cursor.fetchone()
 
     def get_devices_per_model(self, model_id):
@@ -82,7 +82,7 @@ class InfraDBConnector:
         return self.cursor.fetchall()
     
     def get_model_energy(self, model_id):
-        self.cursor.execute("SELECT energy_consumption FROM models WHERE id=%s", model_id)
+        self.cursor.execute("SELECT energy_consumption FROM models WHERE id=%s", (model_id, ))
         return self.cursor.fetchone()
 
     # def get_device(self, device_id):
@@ -94,13 +94,4 @@ class InfraDBConnector:
     #         self.logger.error(f"Cannot fetch devices {device_id} information. Error: {e}.")
     #         raise
     #     return self.cursor.fetchone()
-
-    # def get_users_devices(self, owner):
-    #     stmt = "SELECT * FROM registered_devices WHERE owner=%s"
-    #     self.cursor.execute(stmt, (owner, ))
-    #     return self.cursor.fetchall()
-
-
-    
-
     

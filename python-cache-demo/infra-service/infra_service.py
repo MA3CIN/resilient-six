@@ -1,3 +1,4 @@
+
 from infra_db_conn import InfraDBConnector
 from flask import Flask, request, jsonify
 import logging
@@ -24,12 +25,12 @@ def get_all_registered_devices():
     logger.info("Getting all registered devices.")
     return db.get_all_registered_devices()
 
-@app.route('/devices/<id:owner_id>', methods=['GET'])
+@app.route('/devices/<owner_id>', methods=['GET'])
 def get_owners_devices(owner_id):
     """
     Get all registered devices belonging to particular user.
     Required input:
-      user_id (int): id of the owner
+      owner_id (int): id of the owner
     """
     logger.info(f"Getting devices registered for {owner_id}.")
     return db.get_owners_devices(owner_id)
@@ -72,6 +73,7 @@ def add_model():
     Add new model.
     Required input:
       category (int): id of the category
+      manufacturer (int): id of the manufacturer
       name (str): name of the model
       energy_cons (float): energy consumption of the model
     """
@@ -80,12 +82,13 @@ def add_model():
     try:
       category = int(data["category"])
       name = str(data["name"])
+      manufacturer = int(data["manufacturer"])
       energy_cons = float(data["energy_cons"])
     except Exception as e:
         logger.error("Incorrect data provided for adding a model. Error: {e}.")
         raise
     try:
-      db.add_model(category, name, energy_cons)
+      db.add_model(category, manufacturer, name, energy_cons)
       logger.info(f"Model {name} added successfully.")
     except Exception as e:
       logger.error(f"Error when adding model. Error: {e}.")
@@ -122,23 +125,22 @@ def add_category():
       raise
     return jsonify(success=True)
 
-@app.route('/getConsumption/models/<string:model_name>', methods=['GET'])
+@app.route('/getConsumption/models/<model_name>', methods=['GET'])
 def get_model_consumption(model_name: str):
     """
     Get calculated energy consumption for all devices from provided model.
-    TODO: test
     """
     logger.info(f"Getting total energy consumption for devices of model {model_name}.")
     try:
-      model_id = db.get_model_id(model_name)
+      model_id = db.get_model_id(model_name)[0]
       devices = db.get_devices_per_model(model_id)
-      energy_cons = db.get_model_energy(model_id)
+      energy_cons = db.get_model_energy(model_id)[0]
     except Exception as e:
       logger.error(f"Problem with fetching data for {model_name} devices consumption. Error {e}")
       raise
     total_energy_cons = energy_cons * len(devices)
     logger.info(f"Total energy consumption for devices from model {model_name} equals {total_energy_cons}.")
-    return total_energy_cons
+    return jsonify({"model_id":model_id,"model_name":model_name,"total_energy_consumption": total_energy_cons})
    
 
 # @app.route('/devices/owners/<string:owner_id>', methods=['GET'])

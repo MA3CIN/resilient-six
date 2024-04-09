@@ -19,13 +19,13 @@ class GeolocationDBConnector:
             raise
 
     def get_position(self, device_id):
-        stmt = "SELECT pos_x, pos_y FROM positions WHERE id=(%s)"
+        stmt = "SELECT x_position, y_position FROM devices_locations WHERE device_id=(%s)"
         self.cursor.execute(stmt, (device_id, ))
         return self.cursor.fetchone()
     
     def add_device_position(self, device_id, pos_x, pos_y):
         if self.check_device_id():
-            stmt = "INSERT INTO positions (id, pos_x, pos_y) VALUES (%s, %s, %s)"
+            stmt = "INSERT INTO devices_locations (device_id, x_position, y_position) VALUES (%s, %s, %s)"
             try:
                 self.cursor.execute(stmt, (device_id, pos_x, pos_y))
                 self.db_conn.commit()
@@ -35,7 +35,7 @@ class GeolocationDBConnector:
         else:
             self.logger.error(f"Cannot add position to device {device_id}. Device is not registered or already has assigned position.")
 
-    def check_device_id():
+    def check_device_id(self):
         # TODO: correct function
         return True
     

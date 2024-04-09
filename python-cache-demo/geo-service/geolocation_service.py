@@ -11,10 +11,11 @@ app = Flask(__name__)
 logger = logging.Logger(__name__)
 
 # invalidate cache after 1 hour
-session = CachedSession('infra_owners_cache', backend='sqlite', expire_after=3600)
+# session = CachedSession('infra_owners_cache', backend='sqlite', expire_after=3600)
 
 INFRA_URL = os.getenv('INFRA_URI', 'http://127.0.0.1:3000') 
 DB_URL = os.getenv('DB_URL', 'http://127.0.0.1:3000') 
+
 
 db = GeolocationDBConnector(
   host=DB_URL,
@@ -24,16 +25,18 @@ db = GeolocationDBConnector(
 )
 
 
-@app.route('/positions/<int:device_id>', methods=['GET'])
+@app.route('/positions/<device_id>', methods=['GET'])
 def get_device_position(device_id):
     """
     Get position of given device.
+    Required input:
+      device_id (int): id of the device
     """
     logger.info(f"Getting positions about device {device_id}.")
     pos_x, pos_y = db.get_position(device_id)
-    response_dict = {"pos_x": pos_x, "pos_y": pos_y}
+    response_dict = {"position_x": pos_x, "position_y": pos_y}
     logger.info(f"Device's {device_id} position: x={pos_x}, y={pos_y}")
-    return response_dict
+    return jsonify(response_dict)
 
 @app.route('/positions', methods=['POST'])
 def add_new_device_position():
@@ -60,32 +63,32 @@ def add_new_device_position():
       raise
     return jsonify(success=True)
 
-@app.route('/positions/recommend/<int:owner_id>', methods=['GET'])
+@app.route('/positions/recommend/<owner_id>', methods=['GET'])
 def get_recommended_position(owner_id):
     """
     Get recommended position for owner's device.
     Calculated as:
-    - x_pos: average of x_positions from all user's devices
-    - y_pos: average of y_positions from all user's devices
+    - pos_x: average of x_positions from all user's devices
+    - pos_y: average of y_positions from all user's devices
     Simulates some more complex computations.
+
+    Required input:
+      owner_id (int): id of the owner
     """
     logger.info(f"Getting devices for {owner_id}.")
-    api_url = f"{INFRA_URL}/devices/{owner_id}"
-    devices = requests.get(api_url)
+    #TODO: Mocking the functionality for now
+    # api_url = f"{INFRA_URL}/devices/{owner_id}"
+    # devices = requests.get(api_url)
+    devices=[{"device_id": 1}]
     all_x, all_y = 0, 0
     for device in devices:
-      x_pos, y_pos = db.get_position(device["device_id"])
-      all_x += x_pos
-      all_y+=y_pos
-    x_pos = all_x/len(devices)
-    y_pos=all_y/len(devices)
-    logger.info(f"Recommendation created: (x_pos={x_pos}, y_pos={y_pos})")
-    return (x_pos, y_pos)
-
-# @app.route('/', methods=['GET'])
-# def get_location_for_gate():
-#     returner_owners = get_owners()
-#     return(str(returner_owners.json()))
+      pos_x, pos_y = db.get_position(device["device_id"])
+      all_x += pos_x
+      all_y+=pos_y
+    pos_x = all_x/len(devices)
+    pos_y=all_y/len(devices)
+    logger.info(f"Recommendation created: (pos_x={pos_x}, pos_y={pos_y})")
+    return jsonify({"position_x": pos_x, "position_y": pos_y})
 
 # # get endpoint IF cache is empty. 
 # #invalidate cache if you have a serial number without a corresponding cached owner 
