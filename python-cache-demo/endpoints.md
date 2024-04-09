@@ -185,4 +185,19 @@
 
 #### TODO:
 
+- [GET] /values/\<device_id\> \
+  Get most recent observed value for chosen device.
+
+  Params:
+
+  - device_id (int): id of the existing device
+
+- [GET] /stats/\<device_id\>/\<time_period\> \
+  Get statistics about observed values for chosen device since specified time period. Values taken from present to \<time_period\> in the past.
+
+  Params:
+
+  - device_id (int): id of the existing device
+  - time_period (str): time period for the statistics in the form \<number\>\_\<units\>. Supported units: s (seconds), m (minutes), h (hours), d (days)
+
 Endpoints suggestions to be added...
