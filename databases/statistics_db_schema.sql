@@ -39,7 +39,8 @@ CREATE TABLE Registered_Devices (
 	id INT AUTO_INCREMENT PRIMARY KEY
 	, model INT NOT NULL
 	, owner INT NOT NULL
-	, comments VARCHAR(1000)	
+    , name VARCHAR(200)
+	, comments VARCHAR(1000)
 );
 
 ALTER TABLE Registered_Devices
