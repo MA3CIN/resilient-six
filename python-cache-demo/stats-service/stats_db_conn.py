@@ -19,12 +19,12 @@ class StatisticsDBConnector:
             raise
 
     def get_all_metrics(self):
-        stmt = "SELECT * FROM metrics"
+        stmt = "SELECT * FROM Metrics"
         self.cursor.execute(stmt)
         return self.cursor.fetchall()
     
     def get_metric(self, metric_id):
-        stmt = "SELECT * from metrics WHERE id=(%s)"
+        stmt = "SELECT * from Metrics WHERE id=(%s)"
         self.cursor.execute(stmt, (metric_id, ))
         return self.cursor.fetchone()
 

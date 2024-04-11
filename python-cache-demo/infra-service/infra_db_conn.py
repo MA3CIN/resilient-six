@@ -19,22 +19,22 @@ class InfraDBConnector:
             raise
 
     def get_all_registered_devices(self):
-        stmt = "SELECT * FROM registered_devices"
+        stmt = "SELECT * FROM Registered_Devices"
         self.cursor.execute(stmt)
         return self.cursor.fetchall()
     
     def get_owners_devices(self, owner_id):
-        stmt = "SELECT * FROM registered_devices WHERE owner=(%s)"
+        stmt = "SELECT * FROM Registered_Devices WHERE owner=(%s)"
         self.cursor.execute(stmt, (owner_id, ))
         return self.cursor.fetchall()
 
     def add_device(self, owner, model):
         if isinstance(model, str):
-            self.cursor.execute("SELECT id FROM models WHERE name=%s", model)
+            self.cursor.execute("SELECT id FROM Models WHERE name=%s", model)
             model_id = self.cursor.fetchone()
         else:
             model_id=model
-        stmt = "INSERT INTO registered_devices (owner, model) VALUES (%s, %s)"
+        stmt = "INSERT INTO Registered_Devices (owner, model) VALUES (%s, %s)"
         try:
             self.cursor.execute(stmt, (owner, model_id))
             self.db_conn.commit()
@@ -43,13 +43,13 @@ class InfraDBConnector:
             raise
 
     def get_all_models(self):
-        stmt = "SELECT * FROM models"
+        stmt = "SELECT * FROM Models"
         self.cursor.execute(stmt)
         return self.cursor.fetchall()
     
     def add_model(self, category, manufacturer, name, energy_cons):
         self.logger.info(f"Adding new model {name}.")
-        stmt = "INSERT INTO models (category, manufacturer, name, energy_consumption) VALUES (%s, %s, %s, %s)"
+        stmt = "INSERT INTO Models (category, manufacturer, name, energy_consumption) VALUES (%s, %s, %s, %s)"
         try:
             self.cursor.execute(stmt, (category, manufacturer, name, energy_cons))
             self.db_conn.commit()
@@ -58,13 +58,13 @@ class InfraDBConnector:
             raise
 
     def get_all_categories(self):
-        stmt = "SELECT * FROM devices_categories"
+        stmt = "SELECT * FROM Devices_Categories"
         self.cursor.execute(stmt)
         return self.cursor.fetchall()
     
     def add_category(self, name):
         self.logger.info(f"Adding new category {name}.")
-        stmt = "INSERT INTO devices_categories (name) VALUES (%s)"
+        stmt = "INSERT INTO Devices_Categories (name) VALUES (%s)"
         try:
             self.cursor.execute(stmt, (name, ))
             self.db_conn.commit()
@@ -73,16 +73,16 @@ class InfraDBConnector:
             raise
 
     def get_model_id(self, model_name):
-        self.cursor.execute("SELECT id FROM models WHERE name=%s", (model_name, ))
+        self.cursor.execute("SELECT id FROM Models WHERE name=%s", (model_name, ))
         return self.cursor.fetchone()
 
     def get_devices_per_model(self, model_id):
-        stmt = "SELECT * FROM registered_devices WHERE model=(%s)"
+        stmt = "SELECT * FROM Registered_Devices WHERE model=(%s)"
         self.cursor.execute(stmt, (model_id, ))
         return self.cursor.fetchall()
     
     def get_model_energy(self, model_id):
-        self.cursor.execute("SELECT energy_consumption FROM models WHERE id=%s", (model_id, ))
+        self.cursor.execute("SELECT energy_consumption FROM Models WHERE id=%s", (model_id, ))
         return self.cursor.fetchone()
 
     # def get_device(self, device_id):

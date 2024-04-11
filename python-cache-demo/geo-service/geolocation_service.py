@@ -2,25 +2,32 @@ from geolocation_db_conn import GeolocationDBConnector
 from flask import Flask, request, jsonify
 import logging
 import os
-from requests_cache import CachedSession
 import requests
-import requests_cache
+# from requests_cache import CachedSession
+# 
+# import requests_cache
 
 app = Flask(__name__)
 
 logger = logging.Logger(__name__)
+logging.basicConfig(level=logging.DEBUG)
 
 # invalidate cache after 1 hour
 # session = CachedSession('infra_owners_cache', backend='sqlite', expire_after=3600)
 
-INFRA_URL = os.getenv('INFRA_URI', 'http://127.0.0.1:3000') 
-DB_URL = os.getenv('DB_URL', 'http://127.0.0.1:3000') 
+INFRA_URL = os.getenv('INFRA_URL', 'http://127.0.0.1:3000') 
+DB_URL = os.getenv('DB_URL', 'http://127.0.0.1:3306') 
+# DB_URL="localhost"
+# user="test_user"
+# pwd="test"
 
+user="root"
+pwd="mysql"
 
 db = GeolocationDBConnector(
   host=DB_URL,
-  user="root",
-  pwd="mysql",
+  user=user,
+  pwd=pwd,
   database="geolocation"
 )
 
@@ -33,7 +40,11 @@ def get_device_position(device_id):
       device_id (int): id of the device
     """
     logger.info(f"Getting positions about device {device_id}.")
-    pos_x, pos_y = db.get_position(device_id)
+    try:
+      pos_x, pos_y = db.get_position(device_id)
+    except Exception as e:
+       logger.error(f"No device with id {device_id} found. Error: {e}")
+       return None
     response_dict = {"position_x": pos_x, "position_y": pos_y}
     logger.info(f"Device's {device_id} position: x={pos_x}, y={pos_y}")
     return jsonify(response_dict)
@@ -76,17 +87,27 @@ def get_recommended_position(owner_id):
       owner_id (int): id of the owner
     """
     logger.info(f"Getting devices for {owner_id}.")
-    #TODO: Mocking the functionality for now
-    # api_url = f"{INFRA_URL}/devices/{owner_id}"
-    # devices = requests.get(api_url)
-    devices=[{"device_id": 1}]
+    api_url = f"{INFRA_URL}/devices/{owner_id}"
+    print(f"url: {api_url}")
+    print(f"INFRA_URL: {INFRA_URL}")
+    devices = requests.get(api_url)
+    print(devices)
     all_x, all_y = 0, 0
+    position_count=0
     for device in devices:
-      pos_x, pos_y = db.get_position(device["device_id"])
-      all_x += pos_x
-      all_y+=pos_y
-    pos_x = all_x/len(devices)
-    pos_y=all_y/len(devices)
+      try:
+        pos_x, pos_y = db.get_position(int(device["device_id"]))
+        all_x += pos_x
+        all_y+=pos_y
+        position_count+=1
+      except Exception as e:
+         logger.error(f"Device with id: {device['device_id']} does not have position yet.")
+    if position_count:
+      pos_x = all_x/position_count
+      pos_y=all_y/position_count
+    else:
+       # default values: (0, 0)
+       pos_x, pos_y = 0, 0
     logger.info(f"Recommendation created: (pos_x={pos_x}, pos_y={pos_y})")
     return jsonify({"position_x": pos_x, "position_y": pos_y})
 
@@ -101,4 +122,4 @@ def get_recommended_position(owner_id):
 #    return session.get(INFRA_URL)
 
 if __name__ == '__main__':
-    app.run(host='0.0.0.0', port=4000)
+    app.run(host='0.0.0.0', port=4001)

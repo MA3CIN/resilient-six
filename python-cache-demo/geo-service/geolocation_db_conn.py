@@ -19,13 +19,13 @@ class GeolocationDBConnector:
             raise
 
     def get_position(self, device_id):
-        stmt = "SELECT x_position, y_position FROM devices_locations WHERE device_id=(%s)"
+        stmt = "SELECT x_position, y_position FROM Devices_Locations WHERE device_id=(%s)"
         self.cursor.execute(stmt, (device_id, ))
         return self.cursor.fetchone()
     
     def add_device_position(self, device_id, pos_x, pos_y):
         if self.check_device_id():
-            stmt = "INSERT INTO devices_locations (device_id, x_position, y_position) VALUES (%s, %s, %s)"
+            stmt = "INSERT INTO Devices_Locations (device_id, x_position, y_position) VALUES (%s, %s, %s)"
             try:
                 self.cursor.execute(stmt, (device_id, pos_x, pos_y))
                 self.db_conn.commit()

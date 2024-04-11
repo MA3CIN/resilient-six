@@ -8,8 +8,8 @@ app = Flask(__name__)
 
 logger = logging.Logger(__name__)
 
-infra_svc_endpoint_address = os.getenv('INFRA_URI', 'http://127.0.0.1:3000/')
-DB_URL = "localhost"
+infra_svc_endpoint_address = os.getenv('INFRA_URL', 'http://127.0.0.1:3000/')
+DB_URL = os.getenv('DB_URL', 'http://127.0.0.1:3306/') 
 
 db = StatisticsDBConnector(
   host=DB_URL,
@@ -18,9 +18,6 @@ db = StatisticsDBConnector(
   database="statistics"
 )
 
-# @app.route('/', methods=['GET'])
-# def get_random_number():
-#     return str(random.randint(1, 100))
 
 @app.route('/metrics', methods=['GET'])
 def get_all_metrics():
