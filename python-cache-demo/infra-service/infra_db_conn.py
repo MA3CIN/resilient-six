@@ -19,12 +19,12 @@ class InfraDBConnector:
             raise
 
     def get_all_registered_devices(self):
-        stmt = "SELECT * FROM Registered_Devices"
+        stmt = "SELECT id, model, owner, comments FROM Registered_Devices"
         self.cursor.execute(stmt)
         return self.cursor.fetchall()
     
     def get_owners_devices(self, owner_id):
-        stmt = "SELECT * FROM Registered_Devices WHERE owner=(%s)"
+        stmt = "SELECT id, model, owner, comments FROM Registered_Devices WHERE owner=(%s)"
         self.cursor.execute(stmt, (owner_id, ))
         return self.cursor.fetchall()
 

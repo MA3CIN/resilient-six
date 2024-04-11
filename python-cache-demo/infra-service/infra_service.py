@@ -33,7 +33,9 @@ def get_owners_devices(owner_id):
       owner_id (int): id of the owner
     """
     logger.info(f"Getting devices registered for {owner_id}.")
-    return db.get_owners_devices(owner_id)
+    devices = db.get_owners_devices(owner_id)
+    json_devices = devices_to_json(devices)
+    return jsonify(json_devices)
 
 @app.route('/devices', methods=['POST'])
 def register_device():
@@ -141,6 +143,13 @@ def get_model_consumption(model_name: str):
     total_energy_cons = energy_cons * len(devices)
     logger.info(f"Total energy consumption for devices from model {model_name} equals {total_energy_cons}.")
     return jsonify({"model_id":model_id,"model_name":model_name,"total_energy_consumption": total_energy_cons})
+
+def devices_to_json(devices):
+   devices_json = {}
+   for device in devices:
+      id = device[0]
+      devices_json[id] = {"id": id, "model": device[1], "owner": device[2], "comment": device[3]}
+   return devices_json
    
 
 # @app.route('/devices/owners/<string:owner_id>', methods=['GET'])

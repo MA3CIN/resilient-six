@@ -4,7 +4,6 @@ import logging
 import os
 import requests
 # from requests_cache import CachedSession
-# 
 # import requests_cache
 
 app = Flask(__name__)
@@ -15,11 +14,9 @@ logging.basicConfig(level=logging.DEBUG)
 # invalidate cache after 1 hour
 # session = CachedSession('infra_owners_cache', backend='sqlite', expire_after=3600)
 
+DECIMALS = 3
 INFRA_URL = os.getenv('INFRA_URL', 'http://127.0.0.1:3000') 
 DB_URL = os.getenv('DB_URL', 'http://127.0.0.1:3306') 
-# DB_URL="localhost"
-# user="test_user"
-# pwd="test"
 
 user="root"
 pwd="mysql"
@@ -88,23 +85,21 @@ def get_recommended_position(owner_id):
     """
     logger.info(f"Getting devices for {owner_id}.")
     api_url = f"{INFRA_URL}/devices/{owner_id}"
-    print(f"url: {api_url}")
-    print(f"INFRA_URL: {INFRA_URL}")
-    devices = requests.get(api_url)
-    print(devices)
+    response = requests.get(api_url)
+    devices = response.json()
     all_x, all_y = 0, 0
     position_count=0
-    for device in devices:
+    for device_id in devices.keys():
       try:
-        pos_x, pos_y = db.get_position(int(device["device_id"]))
+        pos_x, pos_y = db.get_position(int(device_id))
         all_x += pos_x
         all_y+=pos_y
         position_count+=1
       except Exception as e:
-         logger.error(f"Device with id: {device['device_id']} does not have position yet.")
+         logger.error(f"Device with id: {device_id} does not have position yet.")
     if position_count:
-      pos_x = all_x/position_count
-      pos_y=all_y/position_count
+      pos_x = round(all_x/position_count, DECIMALS)
+      pos_y=round(all_y/position_count, DECIMALS)
     else:
        # default values: (0, 0)
        pos_x, pos_y = 0, 0
