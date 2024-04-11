@@ -23,7 +23,9 @@ def get_all_registered_devices():
     Get all registered devices.
     """
     logger.info("Getting all registered devices.")
-    return db.get_all_registered_devices()
+    devices = db.get_all_registered_devices()
+    json_devices = devices_to_json(devices)
+    return jsonify(json_devices)
 
 @app.route('/devices/<owner_id>', methods=['GET'])
 def get_owners_devices(owner_id):
@@ -44,7 +46,7 @@ def register_device():
     Required input:
       owner (int): id of the owner
       model (int/str): id or name of the model
-      TODO: maybe we could provide an option to add a name of the model?
+      TODO: add option to add a name
     """
     data = request.get_json()
     try:
@@ -148,7 +150,7 @@ def devices_to_json(devices):
    devices_json = {}
    for device in devices:
       id = device[0]
-      devices_json[id] = {"id": id, "model": device[1], "owner": device[2], "comment": device[3]}
+      devices_json[id] = {"id": id, "model": device[1], "owner": device[2], "name": device[3], "comment": device[4]}
    return devices_json
    
 

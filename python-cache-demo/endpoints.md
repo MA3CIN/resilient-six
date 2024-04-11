@@ -5,7 +5,28 @@
 - [GET] /devices \
   Get all registered devices. \
   Returns:
-  - TODO
+
+  - nested dictionary with device_id as main key
+
+  ```json
+  {
+    "1": {
+      "id": 1,
+      "model": 1,
+      "owner": 1,
+      "name": "Strawberry",
+      "comment": null
+    },
+    "2": {
+      "id": 2,
+      "model": 1,
+      "owner": 2,
+      "name": "Blueberry",
+      "comment": null
+    }
+  }
+  ```
+
 - [GET] /devices/\<owner_id> \
    Get all registered devices belonging to particular user. \
    Params:
@@ -14,7 +35,26 @@
 
   Returns:
 
-  - TODO
+  - nested dictionary with device_id as main key with devices belonging to chosen owner
+
+  ```json
+  {
+    "1": {
+      "id": 1,
+      "model": 1,
+      "owner": 1,
+      "name": "Strawberry",
+      "comment": null
+    },
+    "2": {
+      "id": 2,
+      "model": 1,
+      "owner": 1,
+      "name": "Blueberry",
+      "comment": null
+    }
+  }
+  ```
 
 - [POST] /devices \
   Register new device. \

@@ -40,6 +40,7 @@ CREATE TABLE Registered_Devices (
 	id INT AUTO_INCREMENT PRIMARY KEY
 	, model INT NOT NULL
 	, owner INT NOT NULL
+	, name VARCHAR(200)
 	, comments VARCHAR(1000)	
 );
 
@@ -103,7 +104,7 @@ INSERT INTO Users (comments) VALUES ('someone registered with Google OAuth');
 INSERT INTO Users (comments) VALUES ('someone registered with Google OAuth');
 COMMIT;
 
-INSERT INTO Registered_Devices (model, owner) VALUES (1, 1);
+INSERT INTO Registered_Devices (model, owner, name) VALUES (1, 1, 'Strawberry');
 INSERT INTO Registered_Devices (model, owner) VALUES (2, 1);
 INSERT INTO Registered_Devices (model, owner) VALUES (3, 1);
 INSERT INTO Registered_Devices (model, owner) VALUES (4, 1);
