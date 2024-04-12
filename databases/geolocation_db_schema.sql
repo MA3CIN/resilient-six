@@ -1,23 +1,23 @@
 CREATE DATABASE IF NOT EXISTS geolocation;
 use geolocation;
 
-CREATE TABLE Users(
-	id INT AUTO_INCREMENT PRIMARY KEY
-	, comments VARCHAR(1000)
-);
-
-# this table will be cached in statistics microservice
-CREATE TABLE Registered_Devices (
-	id INT AUTO_INCREMENT PRIMARY KEY
-	, model INT NOT NULL
-	, owner INT NOT NULL
-    , name VARCHAR(200)
-	, comments VARCHAR(1000)	
-);
-	
-ALTER TABLE Registered_Devices
-	ADD CONSTRAINT regdev_user_fk
-	FOREIGN KEY (owner) REFERENCES Users(id);
+-- CREATE TABLE Users(
+-- 	id INT AUTO_INCREMENT PRIMARY KEY
+-- 	, comments VARCHAR(1000)
+-- );
+--
+-- # this table will be cached in statistics microservice
+-- CREATE TABLE Registered_Devices (
+-- 	id INT AUTO_INCREMENT PRIMARY KEY
+-- 	, model INT NOT NULL
+-- 	, owner INT NOT NULL
+--     , name VARCHAR(200)
+-- 	, comments VARCHAR(1000)
+-- );
+--
+-- ALTER TABLE Registered_Devices
+-- 	ADD CONSTRAINT regdev_user_fk
+-- 	FOREIGN KEY (owner) REFERENCES Users(id);
 
 
 CREATE TABLE Devices_Locations (
@@ -29,6 +29,6 @@ CREATE TABLE Devices_Locations (
     , PRIMARY KEY (device_id, timestamp)
 );
 
-ALTER TABLE Devices_Locations
-    ADD CONSTRAINT devloc_regdev_fk
-    FOREIGN KEY (device_id) REFERENCES Registered_Devices(id);
+-- ALTER TABLE Devices_Locations
+--     ADD CONSTRAINT devloc_regdev_fk
+--     FOREIGN KEY (device_id) REFERENCES Registered_Devices(id);
