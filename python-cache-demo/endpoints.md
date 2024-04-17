@@ -223,6 +223,91 @@
 - [GET] /metrics \
   Get all available metrics.
 
+  Returns:
+
+  - nested dictionary with metric_id as main key
+
+  ```json
+  {
+    "1": {
+      "id": 1,
+      "name": "temperature [C]"
+    },
+    "2": {
+      "id": 2,
+      "name": "temperature [K]"
+    }
+  }
+  ```
+
+- [GET] /metrics/devices/\<device_id\> \
+  Get all available metrics for chosen device. \
+  Params:
+
+  - device_id (int): id of the device
+
+  Returns:
+
+  - nested dictionary with metric_id as main key
+
+  ```json
+  {
+    "1": {
+      "id": 1,
+      "name": "temperature [C]"
+    },
+    "2": {
+      "id": 2,
+      "name": "temperature [K]"
+    }
+  }
+  ```
+
+- [GET] /values/devices/\<device_id\>/\<metric_id\>/\<max_number\> \
+  Get max_number of most recent observed values for chosen metric and device.\
+  Params:
+
+  - device_id (int): id of the device
+  - metric_id (int): id of the metric
+  - max_number (int): max number of inquired observed values
+
+  Returns:
+
+  - list of the observed values with timestamps
+
+  ```json
+  {
+    "1": {
+      "device_id": 1,
+      "metric_id": 1
+    },
+    "2": {
+      "id": 2,
+      "name": "temperature [K]"
+    }
+  }
+  ```
+
+- [GET] /stats/devices/\<device_id\>/\<metric_id\>/\<count\> \
+  Get statistics about most recent <count> number of device_id for metric_id.\
+  Params:
+
+  - device_id (int): id of the device
+  - metric_id (int): id of the metric
+  - count (int): number of required latest observed values
+
+  Returns:
+
+  - statistics for given device: min, max and avg
+
+  ```json
+  {
+    "avg": 10.2,
+    "max": 20,
+    "min": 8.1
+  }
+  ```
+
 #### TODO:
 
 - [GET] /values/\<device_id\> \
@@ -232,9 +317,11 @@
 
   - device_id (int): id of the existing device
 
-- [GET] /stats/\<device_id\>/\<time_period\> \
-  Get statistics about observed values for chosen device since specified time period. Values taken from present to \<time_period\> in the past.
+- [GET] /values/owner/\<owner_id\>/metrics/\<metric_id\> \
+  Get latest observed values for specified metric from all owner's devices.
 
+- maybe not needed? [GET] /stats/\<device_id\>/\<time_period\> \
+  Get statistics about observed values for chosen device since specified time period. Values taken from present to \<time_period\> in the past.
   Params:
 
   - device_id (int): id of the existing device

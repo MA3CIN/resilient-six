@@ -1,8 +1,8 @@
 from stats_db_conn import StatisticsDBConnector
-from flask import Flask
+from flask import Flask, jsonify
 import logging
 import os
-import random
+import json
 
 app = Flask(__name__)
 
@@ -25,21 +25,74 @@ def get_all_metrics():
     Get all available metrics.
     """
     logger.info("Getting all available metrics.")
-    return db.get_all_metrics()
+    result = db.get_all_metrics()
+    metrics = metrics_to_json(result)
+    return jsonify(metrics)
 
-# @app.route('/metrics/devices/<int:device_id>', methods=['GET'])
-# def get_all_device_metrics(device_id):
-#     # TODO: clarify if a metric value is assigned to particular model or maybe single device
-#     """
-#     Get all metrics for chosen device.
-#     Required input:
-#       device_id (int): id of the device
-#     """
-#     logger.info(f"Getting all available metrics for device {device_id}.")
-#     metrics_ids = db.get_device_all_metrics(device_id)
-#     metrics = [db.get_metric(metric_id) for metric_id in metrics_ids]
+@app.route('/metrics/devices/<device_id>', methods=['GET'])
+def get_device_all_metrics(device_id):
+    """
+    Get all available metrics for chosen device.
+    Required input:
+      device_id (int): id of the device
+    """
+    logger.info(f"Getting all distinct available metrics for device {device_id}.")
+    result = db.get_device_all_metrics(device_id)
+    metrics = metrics_to_json(result)
+    return jsonify(metrics)
 
-#     return db.get_all_device_metrics(device_id)
+@app.route('/values/devices/<device_id>/<metric_id>/<max_number>', methods=['GET'])
+def get_recent_values(device_id, metric_id, max_number):
+    """
+    Get max_number of most recent observed values for chosen metric and device.
+    Required input:
+      device_id (int): id of the device
+      metric_id (int): id of the metric
+      max_number (int): max number of inquired observed values
+    """
+    logger.info(f"Getting {max_number} of most recent observed values for device {device_id}.")
+    result = db.get_recent_values(device_id, metric_id, max_number)
+    obs_values = values_to_json(result)
+    return jsonify(obs_values)
+
+@app.route('/stats/devices/<device_id>/<metric_id>/<count>', methods=['GET'])
+def get_stats_for_device_metric_by_count(device_id, metric_id, count):
+    """ TODO
+    Get statistics about most recent <count> number of device_id for metric_id.
+    Returns statistics calculated from get_stats function.
+    Required input:
+      device_id (int): id of the device
+      metric_id (int): id of the metric
+      count (int): number of required latest observed values
+    """
+    logger.info(f"Getting {count} of most recent observed values for device {device_id}.")
+    result = db.get_recent_values(device_id, metric_id, count)
+    values_list = [float(x[0]) for x in result]
+    stats = create_stats(values_list)
+    return jsonify(stats)   
+
+def metrics_to_json(metrics):
+   metrics_json = {}
+   for metric in metrics:
+      id = metric[0]
+      metrics_json[id] = {"id": id, "name": metric[1]}
+   return metrics_json
+
+def values_to_json(values):
+    values_list = []
+    for value in values:
+      values_list.append({"value": value[0], "timestamp": str(value[1])})
+    return json.dumps(values_list)
+
+def create_stats(values):
+    """
+    Calculates statistics:
+    - min
+    - max
+    - average
+    """
+    stats = {"min": min(values), "max": max(values), "avg": round(sum(values)/len(values), 2)}
+    return stats
 
 if __name__ == '__main__':
     app.run(host='0.0.0.0', port=5000)
