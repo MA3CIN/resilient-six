@@ -61,7 +61,8 @@ def get_recent_values(device_id, metric_id, max_number):
 def get_values_for_owner_by_metric(owner_id, metric_id):
     """
     Get latest observed value for specified metric from all owner's devices.
-    Returns statistics calculated from get_stats function.
+    Returns list of latest observed values of particular metric,
+    for all devices with that metric belonging to provided user id.
     Required input:
       owner_id (int): id of the owner
       metric_id (int): id of the metric
