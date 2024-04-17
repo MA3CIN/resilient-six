@@ -84,7 +84,7 @@ def get_recommended_position(owner_id):
       owner_id (int): id of the owner
     """
     logger.info(f"Getting devices for {owner_id}.")
-    api_url = f"{INFRA_URL}/devices/{owner_id}"
+    api_url = f"{INFRA_URL}/devices/owners/{owner_id}"
     response = requests.get(api_url)
     devices = response.json()
     all_x, all_y = 0, 0

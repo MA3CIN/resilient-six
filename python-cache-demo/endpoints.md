@@ -27,7 +27,7 @@
   }
   ```
 
-- [GET] /devices/\<owner_id> \
+- [GET] /devices/owners/\<owner_id> \
    Get all registered devices belonging to particular user. \
    Params:
 
@@ -286,6 +286,28 @@
       "name": "temperature [K]"
     }
   }
+  ```
+
+- [GET] /values/owner/\<owner_id\>/metrics/\<metric_id\> \
+  Get latest observed value for specified metric from all owner's devices.\
+  Params:
+
+  - owner_id (int): id of the owner
+  - metric_id (int): id of the metric
+
+  Returns:
+
+  - a list of latest observed values of particular metric, for all devices with that metric belonging to provided user id.
+
+  ```json
+  [
+    {
+      "id": 1,
+      "metric": 1,
+      "timestamp": "2024-04-17 21:57:09",
+      "value": 15.5
+    }
+  ]
   ```
 
 - [GET] /stats/devices/\<device_id\>/\<metric_id\>/\<count\> \

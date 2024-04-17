@@ -3,12 +3,14 @@ from flask import Flask, jsonify
 import logging
 import os
 import json
+import requests
 
 app = Flask(__name__)
 
 logger = logging.Logger(__name__)
 
 infra_svc_endpoint_address = os.getenv('INFRA_URL', 'http://127.0.0.1:3000/')
+INFRA_URL = os.getenv('INFRA_URL', 'http://127.0.0.1:3000') 
 DB_URL = os.getenv('DB_URL', 'http://127.0.0.1:3306/') 
 
 db = StatisticsDBConnector(
@@ -55,9 +57,28 @@ def get_recent_values(device_id, metric_id, max_number):
     obs_values = values_to_json(result)
     return jsonify(obs_values)
 
+@app.route('/values/owner/<owner_id>/metrics/<metric_id>', methods=['GET'])
+def get_values_for_owner_by_metric(owner_id, metric_id):
+    """
+    Get latest observed value for specified metric from all owner's devices.
+    Returns statistics calculated from get_stats function.
+    Required input:
+      owner_id (int): id of the owner
+      metric_id (int): id of the metric
+    """
+    logger.info(f"Getting latest value for metric {metric_id} of all devices owner's {owner_id}.")
+    api_url = f"{INFRA_URL}/devices/owners/{owner_id}"
+    response = requests.get(api_url)
+    devices = response.json()
+    devices_ids = devices.keys()
+    devices_str_list = ','.join(devices_ids)
+    result = db.get_values_per_device_and_metric(devices_str_list, metric_id)
+    dict_result = full_observed_values_to_json(result)
+    return jsonify(dict_result)  
+
 @app.route('/stats/devices/<device_id>/<metric_id>/<count>', methods=['GET'])
 def get_stats_for_device_metric_by_count(device_id, metric_id, count):
-    """ TODO
+    """
     Get statistics about most recent <count> number of device_id for metric_id.
     Returns statistics calculated from get_stats function.
     Required input:
@@ -82,7 +103,13 @@ def values_to_json(values):
     values_list = []
     for value in values:
       values_list.append({"value": value[0], "timestamp": str(value[1])})
-    return json.dumps(values_list)
+    return values_list
+
+def full_observed_values_to_json(values):
+    values_list = []
+    for value in values:
+      values_list.append({"id": value[0], "metric": value[1], "value": value[2], "timestamp": str(value[3])})
+    return values_list
 
 def create_stats(values):
     """
