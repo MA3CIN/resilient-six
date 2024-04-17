@@ -109,8 +109,8 @@ INSERT INTO Models_Metrics (metric_id, model_id) VALUES (5, 18);
 COMMIT;
 
 INSERT INTO Observed_Values (device_id, metric_id, value) VALUES (1, 1, 15.5);
-INSERT INTO Observed_Values (device_id, metric_id, value) VALUES (1, 1, 20.1);
 INSERT INTO Observed_Values (device_id, metric_id, value) VALUES (1, 3, 59.9);
 INSERT INTO Observed_Values (device_id, metric_id, value) VALUES (2, 1, 12.4);
 INSERT INTO Observed_Values (device_id, metric_id, value) VALUES (3, 1, 13.1);
+INSERT INTO Observed_Values (device_id, metric_id, value, timestamp) VALUES (1, 1, 20.1, TIMESTAMP("2017-07-23",  "13:10:11"));
 COMMIT;

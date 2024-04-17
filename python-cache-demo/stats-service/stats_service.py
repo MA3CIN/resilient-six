@@ -2,8 +2,7 @@ from stats_db_conn import StatisticsDBConnector
 from flask import Flask, jsonify
 import logging
 import os
-import json
-import requests
+from requests_cache import CachedSession
 
 app = Flask(__name__)
 
@@ -20,6 +19,8 @@ db = StatisticsDBConnector(
   database="statistics"
 )
 
+# invalidate cache after 1 hour
+session = CachedSession('stats_infra_owners_cache', backend='sqlite', expire_after=3600)
 
 @app.route('/metrics', methods=['GET'])
 def get_all_metrics():
@@ -69,7 +70,7 @@ def get_values_for_owner_by_metric(owner_id, metric_id):
     """
     logger.info(f"Getting latest value for metric {metric_id} of all devices owner's {owner_id}.")
     api_url = f"{INFRA_URL}/devices/owners/{owner_id}"
-    response = requests.get(api_url)
+    response = session.get(api_url)
     devices = response.json()
     devices_ids = devices.keys()
     devices_str_list = ','.join(devices_ids)
