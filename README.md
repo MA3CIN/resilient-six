@@ -44,21 +44,21 @@ snyk container monitor <repository>:<tag> --org=<ORG_ID>
 **Usage example:**
 
 ```shell
-(base) ➜  python-cache-demo git:(vuln-scanning) snyk code test
+(base) ➜  services git:(vuln-scanning) snyk code test
 
-Testing /path/resilient-six/python-cache-demo ...
+Testing /path/resilient-six/services ...
 
 
 ✔ Test completed
 
 Organization:      jgorczynski
 Test type:         Static code analysis
-Project path:      /path/resilient-six/python-cache-demo
+Project path:      /path/resilient-six/services
 
 Summary:
 
 ✔ Awesome! No issues were found.
 
 
-(base) ➜  python-cache-demo git:(vuln-scanning) ✗
+(base) ➜  services git:(vuln-scanning) ✗
 ```
