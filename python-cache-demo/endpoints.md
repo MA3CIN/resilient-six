@@ -146,21 +146,6 @@
   }
   ```
 
-#### TODO
-
-- [PUT] /devices/\<device_id\> \
-   Update information about registered device of given id.
-  Params:
-  - device_id (int): id of the device
-- [PUT] /models/\<model_id\> \
-   Update information about given model.
-  Params:
-  - model_id (int): id of the model
-- [PUT] /categories/\<category_id\> \
-   Update information about given category.
-  Params:
-  - category_id (int): id of the category
-
 ### Geo-service
 
 - [GET] /positions/\<device_id\> \
@@ -206,17 +191,6 @@
     "position_y": 2.0
   }
   ```
-
-#### TODO:
-
-- [GET] /positions/owners/\<owner_id\> \
-  Get positions of all devices belonging to particular owner.
-  Params:
-  - owner_id (int): id of the owner
-- [PUT] /positions/\<device_id\> \
-   Update position of given device.
-  Params:
-  - device_id (int): id of the device
 
 ### Stats-service
 
@@ -335,24 +309,3 @@
     "min": 8.1
   }
   ```
-
-#### TODO:
-
-- [GET] /values/\<device_id\> \
-  Get most recent observed value for chosen device.
-
-  Params:
-
-  - device_id (int): id of the existing device
-
-- [GET] /values/owner/\<owner_id\>/metrics/\<metric_id\> \
-  Get latest observed values for specified metric from all owner's devices.
-
-- maybe not needed? [GET] /stats/\<device_id\>/\<time_period\> \
-  Get statistics about observed values for chosen device since specified time period. Values taken from present to \<time_period\> in the past.
-  Params:
-
-  - device_id (int): id of the existing device
-  - time_period (str): time period for the statistics in the form \<number\>\_\<units\>. Supported units: s (seconds), m (minutes), h (hours), d (days)
-
-Endpoints suggestions to be added...
