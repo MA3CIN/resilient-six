@@ -94,6 +94,11 @@ def get_stats_for_device_metric_by_count(device_id, metric_id, count):
     stats = create_stats(values_list)
     return jsonify(stats)   
 
+@app.route('/clear-cache', methods=['GET'])
+def clear_cache():
+    session.cache.clear()
+    return jsonify(success=True)
+
 def metrics_to_json(metrics):
    metrics_json = {}
    for metric in metrics:

@@ -104,6 +104,12 @@ def get_recommended_position(owner_id):
     logger.info(f"Recommendation created: (pos_x={pos_x}, pos_y={pos_y})")
     return jsonify({"position_x": pos_x, "position_y": pos_y})
 
+@app.route('/clear-cache', methods=['GET'])
+def clear_cache():
+   session.cache.clear()
+   return jsonify(success=True)
+
+
 # # get endpoint IF cache is empty. 
 # #invalidate cache if you have a serial number without a corresponding cached owner 
 # #with cache enabled
