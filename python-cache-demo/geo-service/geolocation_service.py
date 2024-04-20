@@ -2,17 +2,12 @@ from geolocation_db_conn import GeolocationDBConnector
 from flask import Flask, request, jsonify
 import logging
 import os
-import requests
-# from requests_cache import CachedSession
-# import requests_cache
+from requests_cache import CachedSession
 
 app = Flask(__name__)
 
 logger = logging.Logger(__name__)
 logging.basicConfig(level=logging.DEBUG)
-
-# invalidate cache after 1 hour
-# session = CachedSession('infra_owners_cache', backend='sqlite', expire_after=3600)
 
 DECIMALS = 3
 INFRA_URL = os.getenv('INFRA_URL', 'http://127.0.0.1:3000') 
@@ -28,6 +23,9 @@ db = GeolocationDBConnector(
   database="geolocation"
 )
 
+# invalidate cache after 1 hour
+#TODO: should we add a check and invalidate cache once some data changes for the owners?
+session = CachedSession('geo_infra_owners_cache', backend='sqlite', expire_after=3600)
 
 @app.route('/positions/<device_id>', methods=['GET'])
 def get_device_position(device_id):
@@ -84,8 +82,8 @@ def get_recommended_position(owner_id):
       owner_id (int): id of the owner
     """
     logger.info(f"Getting devices for {owner_id}.")
-    api_url = f"{INFRA_URL}/devices/{owner_id}"
-    response = requests.get(api_url)
+    api_url = f"{INFRA_URL}/devices/owners/{owner_id}"
+    response = session.get(api_url)
     devices = response.json()
     all_x, all_y = 0, 0
     position_count=0

@@ -19,17 +19,29 @@ class StatisticsDBConnector:
             raise
 
     def get_all_metrics(self):
-        stmt = "SELECT * FROM Metrics"
+        stmt = "SELECT id, name FROM Metrics"
         self.cursor.execute(stmt)
         return self.cursor.fetchall()
     
-    def get_metric(self, metric_id):
-        stmt = "SELECT * from Metrics WHERE id=(%s)"
-        self.cursor.execute(stmt, (metric_id, ))
-        return self.cursor.fetchone()
+    def get_device_all_metrics(self, device_id):
+        stmt = "SELECT id, name from Metrics WHERE id IN (SELECT DISTINCT metric_id from Observed_Values WHERE device_id=(%s))"
+        self.cursor.execute(stmt, (device_id, ))
+        return self.cursor.fetchall()
+    
+    def get_recent_values(self, device_id, metric_id, max_number):
+        stmt = "SELECT value, timestamp from Observed_Values WHERE device_id=(%s) AND metric_id=(%s) ORDER BY timestamp DESC LIMIT %s"
+        self.cursor.execute(stmt, (device_id, metric_id, int(max_number)))
+        return self.cursor.fetchall()    
 
-    # def get_device_all_metrics(self, device_id):
-    #     # TODO: clarify if a metric value is assigned to particular model or maybe single device
-    #     stmt = "SELECT metric_id FROM models_metrics WHERE model_id=(%s)"
-    #     self.cursor.execute(stmt, (device_id, ))
-    #     return self.cursor.fetchall()
+    def get_values_per_device_and_metric(self, devices_ids, metric_id):
+        stmt = """  SELECT ov.device_id, ov.metric_id, ov.value, ov.timestamp FROM Observed_Values ov 
+                    JOIN (
+                        SELECT device_id, metric_id, MAX(timestamp) AS max_timestamp
+                        FROM Observed_Values
+                        WHERE device_id IN (%s)
+                        GROUP BY device_id, metric_id
+                    ) recent_values
+                    ON ov.device_id = recent_values.device_id AND ov.timestamp = recent_values.max_timestamp AND ov.metric_id = recent_values.metric_id
+                    WHERE ov.metric_id = %s;"""
+        self.cursor.execute(stmt, (devices_ids, metric_id))
+        return self.cursor.fetchall()            
