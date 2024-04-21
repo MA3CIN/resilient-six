@@ -18,6 +18,11 @@ class GeolocationDBConnector:
             self.logger.error(f"Cannot connect to database {database} on {host}. Error: {e}.")
             raise
 
+    def get_all_devices_id(self):
+        stmt = "SELECT device_id from Devices_Locations"
+        self.cursor.execute(stmt)
+        return self.cursor.fetchall()        
+
     def get_position(self, device_id):
         stmt = "SELECT x_position, y_position FROM Devices_Locations WHERE device_id=(%s)"
         self.cursor.execute(stmt, (device_id, ))

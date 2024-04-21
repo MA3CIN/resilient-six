@@ -97,6 +97,7 @@ def get_stats_for_device_metric_by_count(device_id, metric_id, count):
 @app.route('/clear-cache', methods=['GET'])
 def clear_cache():
     session.cache.clear()
+    logger.info("Cache cleared.")
     return jsonify(success=True)
 
 def metrics_to_json(metrics):
