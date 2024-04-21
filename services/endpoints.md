@@ -192,6 +192,13 @@
   }
   ```
 
+- [GET] /clear-cache \
+  Clears/deletes all cached responses.
+
+  Returns:
+
+  - 200, success: true
+
 ### Stats-service
 
 - [GET] /metrics \
@@ -309,3 +316,10 @@
     "min": 8.1
   }
   ```
+
+- [GET] /clear-cache \
+  Clears/deletes all cached responses.
+
+  Returns:
+
+  - 200, success: true
