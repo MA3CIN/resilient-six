@@ -16,7 +16,7 @@ spec:
     spec:
       containers:
         - name: nginx
-          image: marcinziolkowski/infra-service:v1.0.1
+          image: resilientsixregistry.azurecr.io/infra-service:v1.0.3
           ports:
             - containerPort: 80
           env:
