@@ -1,0 +1,56 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: infrastructure-service-deployment
+  labels:
+    app: infra-deploy
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: infra-deploy
+  template:
+    metadata:
+      labels:
+        app: infra-deploy
+    spec:
+      containers:
+        - name: nginx
+          image: marcinziolkowski/infra-service:v1.0.1
+          ports:
+            - containerPort: 80
+          env:
+            - name: FLASK_RUN_PORT
+              value: "3000"
+          resources:
+            limits:
+              memory: "128Mi"
+              cpu: "500m"
+            requests:
+              memory: "128Mi"
+              cpu: "500m"
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: infra-service
+spec:
+  selector:
+    app: infra-deploy
+  ports:
+    - protocol: TCP
+      port: 8080
+      targetPort: 3000
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: infra-service-public
+spec:
+  type: LoadBalancer
+  ports:
+    - protocol: TCP
+      port: 8080
+      targetPort: 3000
+  selector:
+    app: infra-deploy
