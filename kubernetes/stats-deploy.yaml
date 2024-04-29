@@ -15,7 +15,7 @@ spec:
         app: stats-deploy
     spec:
       containers:
-        - name: stats
+        - name: stats-deploy
           # docker.io/marcinziolkowski/stats-service:v1.0.1
           image: marcinziolkowski/stats-service:v1.0.1
           env:
@@ -26,10 +26,10 @@ spec:
           resources:
             limits:
               memory: "128Mi"
-              cpu: "500m"
+              cpu: "250m"
             requests:
               memory: "128Mi"
-              cpu: "500m"
+              cpu: "250m"
 ---
 apiVersion: v1
 kind: Service

@@ -15,7 +15,7 @@ spec:
         app: infra-deploy
     spec:
       containers:
-        - name: nginx
+        - name: infra-deploy
           image: resilientsixregistry.azurecr.io/infra-service:v1.0.3
           ports:
             - containerPort: 80
@@ -25,10 +25,10 @@ spec:
           resources:
             limits:
               memory: "128Mi"
-              cpu: "500m"
+              cpu: "250m"
             requests:
               memory: "128Mi"
-              cpu: "500m"
+              cpu: "250m"
 ---
 apiVersion: v1
 kind: Service
