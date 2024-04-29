@@ -16,7 +16,7 @@ spec:
     spec:
       containers:
         - name: nginx
-          image: mresilientsixregistry.azurecr.io/geo-service:v1.0.3
+          image: resilientsixregistry.azurecr.io/geo-service:v1.0.3
           env:
             - name: FLASK_RUN_PORT
               value: "4000"
