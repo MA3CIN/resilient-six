@@ -27,7 +27,7 @@ def get_all_registered_devices():
     json_devices = devices_to_json(devices)
     return jsonify(json_devices)
 
-@app.route('/devices/<owner_id>', methods=['GET'])
+@app.route('/devices/owners/<owner_id>', methods=['GET'])
 def get_owners_devices(owner_id):
     """
     Get all registered devices belonging to particular user.
@@ -152,19 +152,6 @@ def devices_to_json(devices):
       id = device[0]
       devices_json[id] = {"id": id, "model": device[1], "owner": device[2], "name": device[3], "comment": device[4]}
    return devices_json
-   
-
-# @app.route('/devices/owners/<string:owner_id>', methods=['GET'])
-# def get_users_devices(owner_id):
-#     """
-#     Get all devices belonging to provided user.
-#     Args:
-#       owner_id (int): id of the owner.
-#     """
-#     logger.info(f"Fetching devices belonging to user with id {owner_id}.")
-#     return db.get_users_devices(owner_id)
-
-
 
 if __name__ == '__main__':
     app.run(host='0.0.0.0', port=3000)

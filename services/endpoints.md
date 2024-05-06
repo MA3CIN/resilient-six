@@ -27,7 +27,7 @@
   }
   ```
 
-- [GET] /devices/\<owner_id> \
+- [GET] /devices/owners/\<owner_id> \
    Get all registered devices belonging to particular user. \
    Params:
 
@@ -146,21 +146,6 @@
   }
   ```
 
-#### TODO
-
-- [PUT] /devices/\<device_id\> \
-   Update information about registered device of given id.
-  Params:
-  - device_id (int): id of the device
-- [PUT] /models/\<model_id\> \
-   Update information about given model.
-  Params:
-  - model_id (int): id of the model
-- [PUT] /categories/\<category_id\> \
-   Update information about given category.
-  Params:
-  - category_id (int): id of the category
-
 ### Geo-service
 
 - [GET] /positions/\<device_id\> \
@@ -207,37 +192,134 @@
   }
   ```
 
-#### TODO:
+- [GET] /clear-cache \
+  Clears/deletes all cached responses.
 
-- [GET] /positions/owners/\<owner_id\> \
-  Get positions of all devices belonging to particular owner.
-  Params:
-  - owner_id (int): id of the owner
-- [PUT] /positions/\<device_id\> \
-   Update position of given device.
-  Params:
-  - device_id (int): id of the device
+  Returns:
+
+  - 200, success: true
 
 ### Stats-service
 
 - [GET] /metrics \
   Get all available metrics.
 
-#### TODO:
+  Returns:
 
-- [GET] /values/\<device_id\> \
-  Get most recent observed value for chosen device.
+  - nested dictionary with metric_id as main key
 
+  ```json
+  {
+    "1": {
+      "id": 1,
+      "name": "temperature [C]"
+    },
+    "2": {
+      "id": 2,
+      "name": "temperature [K]"
+    }
+  }
+  ```
+
+- [GET] /metrics/devices/\<device_id\> \
+  Get all available metrics for chosen device. \
   Params:
 
-  - device_id (int): id of the existing device
+  - device_id (int): id of the device
 
-- [GET] /stats/\<device_id\>/\<time_period\> \
-  Get statistics about observed values for chosen device since specified time period. Values taken from present to \<time_period\> in the past.
+  Returns:
 
+  - nested dictionary with metric_id as main key
+
+  ```json
+  {
+    "1": {
+      "id": 1,
+      "name": "temperature [C]"
+    },
+    "2": {
+      "id": 2,
+      "name": "temperature [K]"
+    }
+  }
+  ```
+
+- [GET] /values/devices/\<device_id\>/\<metric_id\>/\<max_number\> \
+  Get max_number of most recent observed values for chosen metric and device.\
   Params:
 
-  - device_id (int): id of the existing device
-  - time_period (str): time period for the statistics in the form \<number\>\_\<units\>. Supported units: s (seconds), m (minutes), h (hours), d (days)
+  - device_id (int): id of the device
+  - metric_id (int): id of the metric
+  - max_number (int): max number of inquired observed values
 
-Endpoints suggestions to be added...
+  Returns:
+
+  - list of the observed values with timestamps
+
+  ```json
+  {
+    "1": {
+      "device_id": 1,
+      "metric_id": 1
+    },
+    "2": {
+      "id": 2,
+      "name": "temperature [K]"
+    }
+  }
+  ```
+
+- [GET] /values/owner/\<owner_id\>/metrics/\<metric_id\> \
+  Get latest observed value for specified metric from all owner's devices.\
+  Params:
+
+  - owner_id (int): id of the owner
+  - metric_id (int): id of the metric
+
+  Returns:
+
+  - a list of latest observed values of particular metric, for all devices with that metric belonging to provided user id.
+
+  ```json
+  [
+    {
+      "id": 1,
+      "metric": 1,
+      "timestamp": "2024-04-17 21:57:09",
+      "value": 15.5
+    },
+    {
+      "id": 2,
+      "metric": 1,
+      "timestamp": "2024-04-17 22:57:09",
+      "value": 17.5
+    }
+  ]
+  ```
+
+- [GET] /stats/devices/\<device_id\>/\<metric_id\>/\<count\> \
+  Get statistics about most recent <count> number of device_id for metric_id.\
+  Params:
+
+  - device_id (int): id of the device
+  - metric_id (int): id of the metric
+  - count (int): number of required latest observed values
+
+  Returns:
+
+  - statistics for given device: min, max and avg
+
+  ```json
+  {
+    "avg": 10.2,
+    "max": 20,
+    "min": 8.1
+  }
+  ```
+
+- [GET] /clear-cache \
+  Clears/deletes all cached responses.
+
+  Returns:
+
+  - 200, success: true

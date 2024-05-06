@@ -52,8 +52,6 @@ ALTER TABLE Registered_Devices
 	ADD CONSTRAINT regdev_user_fk
 	FOREIGN KEY (owner) REFERENCES Users(id);
 
-use devices;
-
 INSERT INTO Manufacturers (name) VALUES ('Prime Sensors');
 INSERT INTO Manufacturers (name) VALUES ('iHome IoT');
 INSERT INTO Manufacturers (name) VALUES ('DYI Systems');

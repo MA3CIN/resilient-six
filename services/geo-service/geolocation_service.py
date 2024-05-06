@@ -2,17 +2,12 @@ from geolocation_db_conn import GeolocationDBConnector
 from flask import Flask, request, jsonify
 import logging
 import os
-import requests
-# from requests_cache import CachedSession
-# import requests_cache
+from requests_cache import CachedSession
 
 app = Flask(__name__)
 
 logger = logging.Logger(__name__)
 logging.basicConfig(level=logging.DEBUG)
-
-# invalidate cache after 1 hour
-# session = CachedSession('infra_owners_cache', backend='sqlite', expire_after=3600)
 
 DECIMALS = 3
 INFRA_URL = os.getenv('INFRA_URL', 'http://127.0.0.1:3000') 
@@ -28,6 +23,8 @@ db = GeolocationDBConnector(
   database="geolocation"
 )
 
+# invalidate cache after 1 hour by default
+session = CachedSession('geo_infra_owners_cache', backend='sqlite', expire_after=3600)
 
 @app.route('/positions/<device_id>', methods=['GET'])
 def get_device_position(device_id):
@@ -40,8 +37,9 @@ def get_device_position(device_id):
     try:
       pos_x, pos_y = db.get_position(device_id)
     except Exception as e:
-       logger.error(f"No device with id {device_id} found. Error: {e}")
-       return None
+       msg = f"No device with id {device_id} found."
+       logger.error(f"{msg}. Error: {e}")
+       return jsonify(msg)
     response_dict = {"position_x": pos_x, "position_y": pos_y}
     logger.info(f"Device's {device_id} position: x={pos_x}, y={pos_y}")
     return jsonify(response_dict)
@@ -83,13 +81,22 @@ def get_recommended_position(owner_id):
     Required input:
       owner_id (int): id of the owner
     """
-    logger.info(f"Getting devices for {owner_id}.")
-    api_url = f"{INFRA_URL}/devices/{owner_id}"
-    response = requests.get(api_url)
+    api_url = f"{INFRA_URL}devices"
+    response = session.get(api_url)
     devices = response.json()
+    devices_id_in_db = [int(x[0]) for x in db.get_all_devices_id()]
+    # check cache, if all devices ids from the geo db are present in the cache - continue
+    # if the cache misses some ids, then invalidate and fetch new data
+    if not are_up_to_date_ids(devices.keys(), devices_id_in_db):
+      logging.info("Invalidating the cache.")
+      session.cache.delete(urls=[api_url])
+      response = session.get(api_url)
+      logging.info(f"New data fetched from {api_url}.")
+      devices = response.json()
+    devices_ids_for_owner = [device_id for device_id, device_info in devices.items() if device_info['owner'] == int(owner_id)]
     all_x, all_y = 0, 0
     position_count=0
-    for device_id in devices.keys():
+    for device_id in devices_ids_for_owner:
       try:
         pos_x, pos_y = db.get_position(int(device_id))
         all_x += pos_x
@@ -106,15 +113,17 @@ def get_recommended_position(owner_id):
     logger.info(f"Recommendation created: (pos_x={pos_x}, pos_y={pos_y})")
     return jsonify({"position_x": pos_x, "position_y": pos_y})
 
-# # get endpoint IF cache is empty. 
-# #invalidate cache if you have a serial number without a corresponding cached owner 
-# #with cache enabled
-# def get_owners():
-#    if (INFRA_URL in session.cache.urls()):
-#       print("gotten from cache")
-#    else:
-#       print("gotten manually")
-#    return session.get(INFRA_URL)
+@app.route('/clear-cache', methods=['GET'])
+def clear_cache():
+    session.cache.clear()
+    logging.info("Cache cleared.")
+    return jsonify(success=True)
+
+def are_up_to_date_ids(devices_infra, devices_geo):
+    if (all (str(x) in devices_infra for x in devices_geo)):
+       return True
+    else:
+       return False
 
 if __name__ == '__main__':
     app.run(host='0.0.0.0', port=4001)
