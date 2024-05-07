@@ -42,3 +42,18 @@ az mysql flexible-server db create \
   --resource-group resilientSixGroup \
   --server-name resilientsix-mysql-db \
   --database-name cache
+
+az mysql flexible-server db create \
+  --resource-group resilientSixGroup \
+  --server-name resilientsix-mysql-db \
+  --database-name geolocation
+
+az mysql flexible-server db create \
+  --resource-group resilientSixGroup \
+  --server-name resilientsix-mysql-db \
+  --database-name devices
+
+az mysql flexible-server db create \
+  --resource-group resilientSixGroup \
+  --server-name resilientsix-mysql-db \
+  --database-name statistics
