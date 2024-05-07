@@ -11,7 +11,7 @@ logging.basicConfig(level=logging.DEBUG)
 
 DECIMALS = 3
 INFRA_URL = os.getenv('INFRA_URL', 'http://127.0.0.1:3000') 
-DB_URL = os.getenv('DB_URL', 'http://127.0.0.1:3306') 
+DB_URL = os.getenv('DB_URL', 'resilientsix-mysql-db.mysql.database.azure.com')
 
 user="root"
 pwd="mysql"

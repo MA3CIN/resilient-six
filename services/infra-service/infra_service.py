@@ -8,7 +8,7 @@ app = Flask(__name__)
 
 logger = logging.Logger(__name__)
 
-DB_URL = os.getenv('DB_URL', 'http://127.0.0.1:3306/') 
+DB_URL = os.getenv('DB_URL', 'resilientsix-mysql-db.mysql.database.azure.com')
 
 db = InfraDBConnector(
   host=DB_URL,
