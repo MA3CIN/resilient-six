@@ -13,8 +13,8 @@ DECIMALS = 3
 INFRA_URL = os.getenv('INFRA_URL', 'http://127.0.0.1:3000') 
 DB_URL = os.getenv('DB_URL', 'resilientsix-mysql-db.mysql.database.azure.com')
 
-user="root"
-pwd="mysql"
+user = "admin_user"
+pwd = "admin_password"
 
 db = GeolocationDBConnector(
   host=DB_URL,

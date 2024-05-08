@@ -14,8 +14,8 @@ DB_URL = os.getenv('DB_URL', 'resilientsix-mysql-db.mysql.database.azure.com')
 
 db = StatisticsDBConnector(
   host=DB_URL,
-  user="root",
-  pwd="mysql",
+  user = "admin_user",
+  pwd = "admin_password",
   database="statistics"
 )
 
