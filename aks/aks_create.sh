@@ -2,7 +2,7 @@ az network vnet subnet create \
   --resource-group resilientSixGroup \
   --vnet-name vnet-resilientsix \
   --name aks-subnet \
-  --address-prefixes 10.25.2.0/25
+  --address-prefixes 10.25.2.0/24
 
 SUBNET_ID=$(az network vnet subnet show --resource-group resilientSixGroup --vnet-name vnet-resilientsix --name aks-subnet --query id -o tsv)
 
