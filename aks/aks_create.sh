@@ -12,14 +12,10 @@ az aks create \
   --network-plugin azure \
   --service-cidr 10.0.0.0/16 \
   --dns-service-ip 10.0.0.10 \
-  --docker-bridge-address 172.17.0.1/16 \
   --vnet-subnet-id $SUBNET_ID \
   --attach-acr resilientsixregistry \
   --dns-name-prefix resilientSixCluster \
   --generate-ssh-keys \
   --node-count 2
-# Option '--docker-bridge-address' has been deprecated and will be removed in a future release.
 
 az aks get-credentials --resource-group resilientSixGroup --name resilientSixCluster
-
-# kubectl apply -f ./yaml .
