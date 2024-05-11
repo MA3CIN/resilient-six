@@ -2,7 +2,7 @@ CREATE DATABASE IF NOT EXISTS statistics;
 use statistics;
 -- it seems that a copy of the devices DB might be the best option here
 
-# this table will be cached in statistics microservice
+-- this table will be cached in statistics microservice
 CREATE TABLE Models (
 	id INT AUTO_INCREMENT PRIMARY KEY
 	, manufacturer INT NOT NULL
@@ -34,7 +34,7 @@ ALTER TABLE Models_Metrics
 	ADD CONSTRAINT modmetr_mod_fk
 	FOREIGN KEY (model_id) REFERENCES Models(id);
 
-# this table will be cached in statistics microservice
+-- this table will be cached in statistics microservice
 CREATE TABLE Registered_Devices (
 	id INT AUTO_INCREMENT PRIMARY KEY
 	, model INT NOT NULL
