@@ -42,8 +42,8 @@
             },
             "visible": true,
             "shape": "actor",
-            "id": "93863029-190e-400e-bb45-064b29c5523f",
             "zIndex": 1,
+            "id": "93863029-190e-400e-bb45-064b29c5523f",
             "data": {
               "type": "tm.Actor",
               "name": "Client",
@@ -84,9 +84,26 @@
               "isEncrypted": false,
               "isPublicNetwork": false,
               "protocol": "",
-              "threats": []
+              "threats": [
+                {
+                  "id": "cf6be70b-c0ce-4b03-a49d-7281fb36d0dc",
+                  "title": "XSS",
+                  "status": "Mitigated",
+                  "severity": "Medium",
+                  "type": "Tampering",
+                  "description": "Cross site scripting ",
+                  "mitigation": "Input sanitisation",
+                  "modelType": "STRIDE",
+                  "new": false,
+                  "number": 1,
+                  "score": ""
+                }
+              ]
             },
             "id": "cde9722a-ff4c-40a4-91c8-52bbd0d42269",
+            "labels": [
+              "HTTP Request"
+            ],
             "source": {
               "cell": "93863029-190e-400e-bb45-064b29c5523f"
             },
@@ -95,12 +112,21 @@
             },
             "vertices": [
               {
+                "x": 86.25,
+                "y": 220
+              },
+              {
                 "x": 120,
                 "y": 270
+              },
+              {
+                "x": 220,
+                "y": 310
+              },
+              {
+                "x": 250,
+                "y": 310
               }
-            ],
-            "labels": [
-              "HTTP Request"
             ]
           },
           {
@@ -135,6 +161,9 @@
               "threats": []
             },
             "id": "da4e149e-8d6b-4831-b408-8ec00c4d36df",
+            "labels": [
+              "HTTP Response"
+            ],
             "source": {
               "cell": "62e49d4d-edf0-44bc-90ce-9b541bb745c4"
             },
@@ -146,16 +175,14 @@
                 "x": 330,
                 "y": 90
               }
-            ],
-            "labels": [
-              "HTTP Response"
             ]
           },
           {
             "shape": "flow",
             "attrs": {
               "line": {
-                "stroke": "#333333",
+                "stroke": "red",
+                "strokeWidth": 2.5,
                 "targetMarker": {
                   "name": "block"
                 },
@@ -175,22 +202,42 @@
               "description": "",
               "outOfScope": false,
               "reasonOutOfScope": "",
-              "hasOpenThreats": false,
+              "hasOpenThreats": true,
               "isBidirectional": false,
               "isEncrypted": false,
               "isPublicNetwork": false,
               "protocol": "",
-              "threats": []
+              "threats": [
+                {
+                  "id": "483a55a3-f30d-419c-99f3-58e473dd2ea0",
+                  "title": "New STRIDE threat",
+                  "status": "Open",
+                  "severity": "Medium",
+                  "type": "Tampering",
+                  "description": "Provide a description for this threat",
+                  "mitigation": "Provide remediation for this threat or a reason if status is N/A",
+                  "modelType": "STRIDE",
+                  "new": true,
+                  "number": 0,
+                  "score": ""
+                }
+              ]
             },
             "id": "868dcc0d-feeb-4ee7-9f4f-0eb282dcd77e",
+            "labels": [
+              "Potential attack request"
+            ],
             "source": {
               "cell": "45c9a776-8744-45e4-a333-80dcbc143ce6"
             },
             "target": {
               "cell": "62e49d4d-edf0-44bc-90ce-9b541bb745c4"
             },
-            "labels": [
-              "Potential attack request"
+            "vertices": [
+              {
+                "x": 500,
+                "y": 190
+              }
             ]
           },
           {
@@ -207,6 +254,9 @@
               "hasOpenThreats": false
             },
             "id": "1c1e825a-1750-4b07-8822-561ef6566f36",
+            "labels": [
+              "Public internet"
+            ],
             "source": {
               "x": 10,
               "y": 230
@@ -224,9 +274,6 @@
                 "x": 670,
                 "y": 120
               }
-            ],
-            "labels": [
-              "Public internet"
             ]
           },
           {
@@ -261,15 +308,15 @@
               "threats": []
             },
             "id": "8cb081c6-9edd-4cdf-ba9e-508102169902",
+            "labels": [
+              "Audit"
+            ],
             "source": {
               "cell": "62e49d4d-edf0-44bc-90ce-9b541bb745c4"
             },
             "target": {
               "cell": "96d19f31-fdc6-48a7-b6a7-72b0351fe8bd"
-            },
-            "labels": [
-              "Audit"
-            ]
+            }
           },
           {
             "position": {
@@ -292,8 +339,8 @@
             },
             "visible": true,
             "shape": "process",
-            "id": "62e49d4d-edf0-44bc-90ce-9b541bb745c4",
             "zIndex": 11,
+            "id": "62e49d4d-edf0-44bc-90ce-9b541bb745c4",
             "data": {
               "type": "tm.Process",
               "name": "Azure cloud\napplication",
@@ -303,16 +350,9 @@
               "hasOpenThreats": false,
               "handlesCardPayment": false,
               "handlesGoodsOrServices": false,
-              "isWebApplication": false,
+              "isWebApplication": true,
               "privilegeLevel": "",
               "threats": []
-            },
-            "tools": {
-              "items": [
-                "boundary",
-                "button-remove"
-              ],
-              "name": null
             }
           },
           {
@@ -336,8 +376,8 @@
             },
             "visible": true,
             "shape": "actor",
-            "id": "45c9a776-8744-45e4-a333-80dcbc143ce6",
             "zIndex": 12,
+            "id": "45c9a776-8744-45e4-a333-80dcbc143ce6",
             "data": {
               "type": "tm.Actor",
               "name": "Untrusted actor \n(e.g. bot)",
@@ -373,8 +413,8 @@
             },
             "visible": true,
             "shape": "store",
-            "id": "96d19f31-fdc6-48a7-b6a7-72b0351fe8bd",
             "zIndex": 13,
+            "id": "96d19f31-fdc6-48a7-b6a7-72b0351fe8bd",
             "data": {
               "type": "tm.Store",
               "name": "Logging",
@@ -396,6 +436,6 @@
     ],
     "diagramTop": 1,
     "reviewer": "Marcin Ziolkowski, Mateusz Wasilewski",
-    "threatTop": 0
+    "threatTop": 4
   }
 }
