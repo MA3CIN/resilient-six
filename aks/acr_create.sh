@@ -1,4 +1,5 @@
-az login
+# ocasionally on Linux this gets very wonky. I recommend logging in before running the script
+#az login
 
 az group create --name resilientSixGroup --location polandcentral
 
