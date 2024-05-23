@@ -7,7 +7,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 
     <!-- Title Page-->
-    <title>Resilient Six - Home</title>
+    <title>Resilient Six - Add Device</title>
 
     <!-- Fontfaces CSS-->
     <link href="css/font-face.css" rel="stylesheet" media="all">
@@ -58,7 +58,7 @@
                                 <i class="fas fa-desktop"></i>Devices</a>
                             <ul class="navbar-mobile-sub__list list-unstyled js-sub-list">
                                 <li>
-                                    <a href="decive_add.html">Add</a>
+                                    <a href="device_add.html">Add</a>
                                 </li>
                                 <li>
                                     <a href="device_list.html">List</a>
@@ -133,16 +133,18 @@
                             <div class="col-lg-8">
                                 <div class="card">
                                     <div class="card-header">
-                                        <strong>Add</strong> Geolocation
+                                        <strong>Select </strong> Device Type
                                     </div>
                                     <div class="card-body card-block">
-                                        <form action="" method="post" enctype="multipart/form-data" class="form-horizontal">
+                                        <form action="stats_result.html" method="post" class="form-horizontal">
                                             <div class="row form-group">
                                                 <div class="col col-md-3">
-                                                    <label for="text-input" class=" form-control-label">Name</label>
+                                                    <label for="select" class=" form-control-label">Manufacture</label>
                                                 </div>
                                                 <div class="col-12 col-md-9">
-                                                    <input type="text" id="name-input" name="name-input" placeholder="PS-T-Sensor-01" class="form-control" disabled="">
+                                                    <select name="manufacture" id="manufacture" class="form-control" >
+                                                        <option value="1">Prime Sensors</option>
+                                                    </select>
                                                 </div>
                                             </div>
                                             <div class="row form-group">
@@ -150,47 +152,25 @@
                                                     <label for="text-input" class=" form-control-label">Category</label>
                                                 </div>
                                                 <div class="col-12 col-md-9">
-                                                    <input type="text" id="text-input" name="text-input" placeholder="Temperature Sensor" class="form-control" disabled="">
+                                                    <input type="text" id="text-input" name="text-input" placeholder="Temperature Sensor" class="form-control" >
                                                 </div>
                                             </div>
                                             <div class="row form-group">
                                                 <div class="col col-md-3">
-                                                    <label for="select" class=" form-control-label">Manufacture</label>
+                                                    <label for="text-input" class=" form-control-label">Name</label>
                                                 </div>
                                                 <div class="col-12 col-md-9">
-                                                    <select name="manufacture" id="manufacture" class="form-control" disabled="">
-                                                        <option value="1">Prime Sensors</option>
-                                                    </select>
+                                                    <input type="text" id="name-input" name="name-input" placeholder="PS-T-Sensor-01" class="form-control" >
                                                 </div>
                                             </div>
-                                            <div class="alert alert-warning" role="alert">
-                                                Below enter the <strong>X</strong> and <strong>Y</strong>coordinates
-                                            </div>
-                                            <div class="row form-group">
-                                                <div class="col col-md-3">
-                                                    <label for="text-input" class=" form-control-label">X-Coordinate</label>
-                                                </div>
-                                                <div class="col-12 col-md-9">
-                                                    <input type="text" id="name-input" name="name-input" placeholder="e.g. 40.714" class="form-control">
-                                                </div>
-                                            </div>
-                                            <div class="row form-group">
-                                                <div class="col col-md-3">
-                                                    <label for="text-input" class=" form-control-label">Y-Coordinate</label>
-                                                </div>
-                                                <div class="col-12 col-md-9">
-                                                    <input type="text" id="name-input" name="name-input" placeholder="e.g. -74.006" class="form-control">
-                                                </div>
-                                            </div>
+                                            <hr>
+                                            <button type="submit" class="btn btn-primary btn-sm">
+                                                <i class="fa fa-dot-circle-o"></i> Submit
+                                            </button>
+                                            <button type="reset" class="btn btn-danger btn-sm">
+                                                <i class="fa fa-ban"></i> Reset
+                                            </button>
                                         </form>
-                                    </div>
-                                    <div class="card-footer">
-                                        <button type="submit" class="btn btn-primary btn-sm">
-                                            <i class="fa fa-dot-circle-o"></i> Submit
-                                        </button>
-                                        <button type="reset" class="btn btn-danger btn-sm">
-                                            <i class="fa fa-ban"></i> Reset
-                                        </button>
                                     </div>
                                 </div>
                             </div>

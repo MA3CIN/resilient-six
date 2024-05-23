@@ -70,7 +70,7 @@
                                 <i class="fas fa-map-marker-alt"></i>Geolocation</a>
                         </li>
                         <li>
-                            <a href="stats_list.html">
+                            <a href="stats_find.html">
                                 <i class="fas fa-chart-bar"></i>Statistics</a>
                         </li>
                         <li>
@@ -101,7 +101,7 @@
                                     <a href="device_add.html">Add</a>
                                 </li>
                                 <li>
-                                    <a href="#">List</a>
+                                    <a href="device_list.html">List</a>
                                 </li>
                             </ul>
                         </li>
@@ -110,11 +110,11 @@
                                 <i class="fas fa-map-marker-alt"></i>Geolocation</a>
                         </li>
                         <li>
-                            <a href="chart.html">
+                            <a href="stats_find.html">
                                 <i class="fas fa-chart-bar"></i>Statistics</a>
                         </li>
                         <li>
-                            <a href="chart.html">
+                            <a href="login.html">
                                 <i class="fa fa-reply"></i>Logout</a>
                         </li>
                     </ul>
@@ -134,94 +134,27 @@
                                 <!-- USER DATA-->
                                 <div class="user-data m-b-30">
                                     <h3 class="title-3 m-b-30">
-                                        <i class="fas fa-desktop"></i>Device Statistics</h3>
+                                        <i class="fas fa-desktop"></i>Stats - Temperature (PS-T-Sensor-01)</h3>
                                     <div class="table-responsive table-data">
                                         <table class="table">
                                             <thead>
                                                 <tr>
-                                                    <td>
-                                                        <label class="au-checkbox">
-                                                        </label>
-                                                    </td>
-                                                    <td>Name</td>
-                                                    <td>Category</td>
-                                                    <td>Manufacturer</td>
+                                                    <td>Mean</td>
+                                                    <td>Standard Deviation</td>
+                                                    <td>Average</td>
                                                 </tr>
                                             </thead>
                                             <tbody>
                                                 <tr>
-                                                    <td>
-                                                        <label class="au-checkbox">
-                                                            <input type="checkbox">
-                                                            <span class="au-checkmark"></span>
-                                                        </label>
-                                                    </td>
-                                                    <td> <div class="table-data__info"> <h6>PS-T-Sensor-01</h6> </div> </td>
-                                                    <td> <div class="table-data__info"> <h6>Temperature Sensor</h6> </div> </td>
-                                                    <td> <div class="table-data__info"> <h6>Prime Sensors</h6> </div> </td>
-                                                </tr>
-                                                <tr>
-                                                    <td>
-                                                        <label class="au-checkbox">
-                                                            <input type="checkbox">
-                                                            <span class="au-checkmark"></span>
-                                                        </label>
-                                                    </td>
-                                                    <td> <div class="table-data__info"> <h6>iTemperaturePreditor 10</h6> </div> </td>
-                                                    <td> <div class="table-data__info"> <h6>Temperature Predictor</h6> </div> </td>
-                                                    <td> <div class="table-data__info"> <h6>iHome IoT</h6> </div> </td>
-                                                </tr>
-                                                <tr>
-                                                    <td>
-                                                        <label class="au-checkbox">
-                                                            <input type="checkbox">
-                                                            <span class="au-checkmark"></span>
-                                                        </label>
-                                                    </td>
-                                                    <td> <div class="table-data__info"> <h6>MS M01AB100</h6> </div> </td>
-                                                    <td> <div class="table-data__info"> <h6>Movement Sensor</h6> </div> </td>
-                                                    <td> <div class="table-data__info"> <h6>DYI Systems</h6> </div> </td>
-                                                </tr>
-                                                <tr>
-                                                    <td>
-                                                        <label class="au-checkbox">
-                                                            <input type="checkbox">
-                                                            <span class="au-checkmark"></span>
-                                                        </label>
-                                                    </td>
-                                                    <td> <div class="table-data__info"> <h6>PS-T-Sensor-01</h6> </div> </td>
-                                                    <td> <div class="table-data__info"> <h6>Temperature Sensor</h6> </div> </td>
-                                                    <td> <div class="table-data__info"> <h6>Prime Sensors</h6> </div> </td>
-                                                </tr>
-                                                <tr>
-                                                    <td>
-                                                        <label class="au-checkbox">
-                                                            <input type="checkbox">
-                                                            <span class="au-checkmark"></span>
-                                                        </label>
-                                                    </td>
-                                                    <td> <div class="table-data__info"> <h6>iTemperaturePreditor 10</h6> </div> </td>
-                                                    <td> <div class="table-data__info"> <h6>Temperature Predictor</h6> </div> </td>
-                                                    <td> <div class="table-data__info"> <h6>iHome IoT</h6> </div> </td>
-                                                </tr>
-                                                <tr>
-                                                    <td>
-                                                        <label class="au-checkbox">
-                                                            <input type="checkbox">
-                                                            <span class="au-checkmark"></span>
-                                                        </label>
-                                                    </td>
-                                                    <td> <div class="table-data__info"> <h6>MS M01AB100</h6> </div> </td>
-                                                    <td> <div class="table-data__info"> <h6>Movement Sensor</h6> </div> </td>
-                                                    <td> <div class="table-data__info"> <h6>DYI Systems</h6> </div> </td>
+                                                    <td> <div class="table-data__info"> <h6><strong>40.4531</strong></h6> </div> </td>
+                                                    <td> <div class="table-data__info"> <h6><strong>-89.6522</strong></h6> </div> </td>
+                                                    <td> <div class="table-data__info"> <h6><strong>29.6522</strong></h6> </div> </td>
                                                 </tr>
                                             </tbody>
                                         </table>
                                     </div>
-                                    <div class="user-data__footer">
-                                        <button class="btn btn-danger btn-lg">Get Stats</button>
-                                    </div>
                                 </div>
+                                <!-- END USER DATA-->
                             </div>
                         </div>
                     </div>
