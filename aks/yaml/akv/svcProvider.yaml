@@ -1,0 +1,37 @@
+# secretproviderclass.yml
+apiVersion: secrets-store.csi.x-k8s.io/v1alpha1
+kind: SecretProviderClass
+metadata:
+  name: keyvault-name #Azure Key Vault Name
+spec:
+  provider: azure
+  secretObjects:
+    # The following section describes how AKV secret is mapped to the Kubernetes secret:
+    - secretName: foo
+      type: Opaque
+      data:
+        - objectName: foo
+          key: foo
+    # If we store a certificate as a Kubernetes secret, the secret type must be kubernetes.io/tls
+    - secretName: cert-demo
+      type: "kubernetes.io/tls"
+      data:
+        - objectName: cert-demo
+          key: tls.key
+        - objectName: cert-demo
+          key: tls.crt
+  parameters:
+    keyvaultName: "keyvault-name" # The name of the Azure Key Vault
+    useVMManagedIdentity: "true"
+    userAssignedIdentityID: "..." # The clientId of the addon-created managed identity
+    # this section describes the objects pulled from Azure Key Vault
+    objects: |
+      array:
+        - |
+          objectName: foo
+          objectType: secret
+        - |
+          objectName: cert-demo
+          objectType: secret
+    # the tenant ID containing the Azure Key Vault instance, you can find it in Azure Portal
+    tenantId: "..."
