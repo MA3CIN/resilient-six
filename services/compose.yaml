@@ -4,6 +4,7 @@ services:
     build: ./infra-service/.
     container_name: infra
     stop_signal: SIGINT
+    restart: on-failure
     depends_on:
       infra_db:
         condition: service_healthy
@@ -16,6 +17,7 @@ services:
     build: ./stats-service/.
     container_name: stats
     stop_signal: SIGINT
+    restart: on-failure
     depends_on:
       stats_db:
         condition: service_healthy
@@ -28,6 +30,7 @@ services:
   geo:
     build: ./geo-service/.
     container_name: geo
+    restart: on-failure
     stop_signal: SIGINT
     depends_on:
       geo_db:
