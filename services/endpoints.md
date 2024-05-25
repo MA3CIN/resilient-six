@@ -81,7 +81,7 @@
 
   Returns:
 
-  - TODO
+  - List of models with their id, manufacturer, category, name, energy_consumption, comment
 
 - [POST] /models \
    Add new model. \
@@ -112,7 +112,7 @@
 
   Returns:
 
-  - TODO
+  - List of categories with their id, name, comment
 
 - [POST] /categories \
    Add new category. \
