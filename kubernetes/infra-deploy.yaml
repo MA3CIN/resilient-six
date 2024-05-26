@@ -15,7 +15,7 @@ spec:
         app: infra-deploy
     spec:
       containers:
-        - name: nginx
+        - name: infra-deploy
           image: marcinziolkowski/infra-service:v1.0.1
           ports:
             - containerPort: 80
