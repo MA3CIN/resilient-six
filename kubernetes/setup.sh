@@ -5,6 +5,15 @@ kubectl apply -f https://github.com/kubernetes-sigs/metrics-server/releases/late
 kubectl patch -n kube-system deployment metrics-server --type=json \
   -p '[{"op":"add","path":"/spec/template/spec/containers/0/args/-","value":"--kubelet-insecure-tls"}]'
   
-# https://kubernetes.io/docs/tasks/run-application/horizontal-pod-autoscale-walkthrough/
+helm repo add chaos-mesh https://charts.chaos-mesh.org
 
-# https://kubernetes.io/docs/tasks/run-application/horizontal-pod-autoscale/
+kubectl create ns chaos-mesh
+
+# Change socket to containerd for kind
+helm install chaos-mesh chaos-mesh/chaos-mesh -n=chaos-mesh --version 2.6.3 --set dashboard.securityMode=false --set chaosDaemon.runtime=containerd --set chaosDaemon.socketPath=/run/containerd/containerd.sock
+
+kubectl apply -f infra-deploy.yaml
+
+kubectl apply -f infra-hpa.yaml
+
+# kubectl apply -f chaos-mesh/stress.yaml
