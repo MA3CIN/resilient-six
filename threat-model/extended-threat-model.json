@@ -1142,14 +1142,78 @@
               ]
             },
             "id": "453ee44c-1b6d-4df9-a173-dea205a2dc67",
+            "labels": [
+              "Potential\nattack request"
+            ],
             "source": {
               "cell": "d36d3447-73d0-48e7-826a-f606d9ac4ca2"
             },
             "target": {
               "cell": "cb0f33af-b83d-427b-9a1d-be0a08b06b68"
             },
+            "tools": {
+              "items": [
+                "boundary",
+                "button-remove",
+                "vertices",
+                "source-arrowhead",
+                "target-arrowhead"
+              ],
+              "name": null
+            },
+            "vertices": [
+              {
+                "x": 370,
+                "y": 380
+              }
+            ]
+          },
+          {
+            "shape": "flow",
+            "attrs": {
+              "line": {
+                "stroke": "#333333",
+                "targetMarker": {
+                  "name": "block"
+                },
+                "sourceMarker": {
+                  "name": ""
+                },
+                "strokeDasharray": null
+              }
+            },
+            "width": 200,
+            "height": 100,
+            "zIndex": 10,
+            "connector": "smooth",
+            "data": {
+              "type": "tm.Flow",
+              "name": "Devices request",
+              "description": "",
+              "outOfScope": false,
+              "reasonOutOfScope": "",
+              "hasOpenThreats": false,
+              "isBidirectional": false,
+              "isEncrypted": false,
+              "isPublicNetwork": false,
+              "protocol": "",
+              "threats": []
+            },
+            "id": "ed4f6d52-1368-454b-be51-39d4792b20bc",
+            "source": {
+              "cell": "da191c58-32c0-4647-94e9-3e735c58c1e8"
+            },
+            "target": {
+              "cell": "244b304f-dac0-497e-a232-5061248aaa8e"
+            },
+            "vertices": [
+              {
+                "x": 1110,
+                "y": 170
+              }
+            ],
             "labels": [
-              "Potential\nattack request"
+              "Devices request"
             ]
           },
           {
@@ -1436,8 +1500,8 @@
             },
             "visible": true,
             "shape": "actor",
-            "id": "d36d3447-73d0-48e7-826a-f606d9ac4ca2",
             "zIndex": 18,
+            "id": "d36d3447-73d0-48e7-826a-f606d9ac4ca2",
             "data": {
               "type": "tm.Actor",
               "name": "Untrusted actor\ne.g. bot",
