@@ -275,55 +275,7 @@
             "connector": "smooth",
             "data": {
               "type": "tm.Flow",
-              "name": "HTTP response",
-              "description": "",
-              "outOfScope": false,
-              "reasonOutOfScope": "",
-              "hasOpenThreats": false,
-              "isBidirectional": false,
-              "isEncrypted": false,
-              "isPublicNetwork": false,
-              "protocol": "",
-              "threats": []
-            },
-            "id": "d2392bdf-2cc1-4d57-a160-07a177d2f739",
-            "labels": [
-              "HTTP response"
-            ],
-            "source": {
-              "cell": "db782b29-a13b-4a98-ba5e-65ae330d24e2"
-            },
-            "target": {
-              "cell": "cb0f33af-b83d-427b-9a1d-be0a08b06b68"
-            },
-            "vertices": [
-              {
-                "x": 531.25,
-                "y": 480
-              }
-            ]
-          },
-          {
-            "shape": "flow",
-            "attrs": {
-              "line": {
-                "stroke": "#333333",
-                "targetMarker": {
-                  "name": "block"
-                },
-                "sourceMarker": {
-                  "name": ""
-                },
-                "strokeDasharray": null
-              }
-            },
-            "width": 200,
-            "height": 100,
-            "zIndex": 10,
-            "connector": "smooth",
-            "data": {
-              "type": "tm.Flow",
-              "name": "HTTP Access Request",
+              "name": "HTTPS Access Request",
               "description": "",
               "outOfScope": false,
               "reasonOutOfScope": "",
@@ -336,7 +288,7 @@
             },
             "id": "41b1c5fc-ab2a-4d4b-8c95-381e931f0c8b",
             "labels": [
-              "HTTP Access Request"
+              "HTTPS Access Request"
             ],
             "source": {
               "cell": "cb0f33af-b83d-427b-9a1d-be0a08b06b68"
@@ -1200,6 +1152,9 @@
               "threats": []
             },
             "id": "ed4f6d52-1368-454b-be51-39d4792b20bc",
+            "labels": [
+              "Devices request"
+            ],
             "source": {
               "cell": "da191c58-32c0-4647-94e9-3e735c58c1e8"
             },
@@ -1211,9 +1166,54 @@
                 "x": 1110,
                 "y": 170
               }
+            ]
+          },
+          {
+            "shape": "flow",
+            "attrs": {
+              "line": {
+                "stroke": "#333333",
+                "targetMarker": {
+                  "name": "block"
+                },
+                "sourceMarker": {
+                  "name": ""
+                },
+                "strokeDasharray": null
+              }
+            },
+            "width": 200,
+            "height": 100,
+            "zIndex": 10,
+            "connector": "smooth",
+            "data": {
+              "type": "tm.Flow",
+              "name": "HTTPS Response",
+              "description": "",
+              "outOfScope": false,
+              "reasonOutOfScope": "",
+              "hasOpenThreats": false,
+              "isBidirectional": false,
+              "isEncrypted": false,
+              "isPublicNetwork": false,
+              "protocol": "",
+              "threats": []
+            },
+            "id": "554b893e-a68f-4ba2-9fe2-07788a65c821",
+            "source": {
+              "cell": "db782b29-a13b-4a98-ba5e-65ae330d24e2"
+            },
+            "target": {
+              "cell": "cb0f33af-b83d-427b-9a1d-be0a08b06b68"
+            },
+            "vertices": [
+              {
+                "x": 590,
+                "y": 490
+              }
             ],
             "labels": [
-              "Devices request"
+              "HTTPS Response"
             ]
           },
           {
