@@ -1,12 +1,42 @@
 {
   "Version": 1,
   "WorkspaceRootPath": "C:\\Users\\albah\\source\\repos\\resilient-six\\",
-  "Documents": [],
+  "Documents": [
+    {
+      "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|C:\\Users\\albah\\source\\repos\\resilient-six\\frontend\\stats_find.html||{40D31677-CBC0-4297-A9EF-89D907823A98}",
+      "RelativeMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|solutionrelative:frontend\\stats_find.html||{40D31677-CBC0-4297-A9EF-89D907823A98}"
+    }
+  ],
   "DocumentGroupContainers": [
     {
       "Orientation": 0,
       "VerticalTabListWidth": 256,
-      "DocumentGroups": []
+      "DocumentGroups": [
+        {
+          "DockedWidth": 200,
+          "SelectedChildIndex": 0,
+          "Children": [
+            {
+              "$type": "Document",
+              "DocumentIndex": 0,
+              "Title": "stats_find.html",
+              "DocumentMoniker": "C:\\Users\\albah\\source\\repos\\resilient-six\\frontend\\stats_find.html",
+              "RelativeDocumentMoniker": "frontend\\stats_find.html",
+              "ToolTip": "C:\\Users\\albah\\source\\repos\\resilient-six\\frontend\\stats_find.html",
+              "RelativeToolTip": "frontend\\stats_find.html",
+              "ViewState": "AQIAAA4AAACAMzMzMzMbwAAAAAAAAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.001512|",
+              "WhenOpened": "2024-05-23T11:04:51.99Z",
+              "IsPinned": true,
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Bookmark",
+              "Name": "ST:0:0:{1c4feeaa-4718-4aa9-859d-94ce25d182ba}"
+            }
+          ]
+        }
+      ]
     }
   ]
 }

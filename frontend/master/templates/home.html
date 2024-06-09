@@ -1,0 +1,214 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <title>Resilient Six - Home</title>
+
+    <!-- Fontfaces CSS-->
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/font-face.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='vendor/font-awesome-5/css/fontawesome-all.min.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='vendor/font-awesome-4.7/css/font-awesome.min.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='vendor/mdi-font/css/material-design-iconic-font.min.css') }}">
+
+    <!-- Bootstrap CSS-->
+    <link rel="stylesheet" href="{{ url_for('static', filename='vendor/bootstrap-4.1/bootstrap.min.css') }}">
+
+    <!-- Vendor CSS-->
+    <link rel="stylesheet" href="{{ url_for('static', filename='vendor/animsition/animsition.min.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='vendor/bootstrap-progressbar/bootstrap-progressbar-3.3.4.min.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='vendor/wow/animate.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='vendor/css-hamburgers/hamburgers.min.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='vendor/slick/slick.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='vendor/select2/select2.min.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='vendor/perfect-scrollbar/perfect-scrollbar.css') }}">
+
+    <!-- Main CSS-->
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/theme.css') }}">
+    
+
+</head>
+
+<body class="animsition">
+    <div class="page-wrapper">
+        <!-- HEADER MOBILE-->
+        <header class="header-mobile d-block d-lg-none">
+            <div class="header-mobile__bar">
+                <div class="container-fluid">
+                    <div class="header-mobile-inner">
+                        <a class="logo" href="{{ url_for('home') }}">
+                            <img src="{{ url_for('static', filename='images/icon/logo.png') }}"/>
+                        </a>
+                        <button class="hamburger hamburger--slider" type="button">
+                            <span class="hamburger-box">
+                                <span class="hamburger-inner"></span>
+                            </span>
+                        </button>
+                    </div>
+                </div>
+            </div>
+            <nav class="navbar-mobile">
+                <div class="container-fluid">
+                    <ul class="navbar-mobile__list list-unstyled">
+                        <li class="has-sub">
+                            <a class="js-arrow" href="#">
+                                <i class="fas fa-desktop"></i>Devices</a>
+                            <ul class="navbar-mobile-sub__list list-unstyled js-sub-list">
+                                <li>
+                                    <a href="{{ url_for('device_add') }}">Add</a>
+                                </li>
+                                <li>
+                                    <a href="{{ url_for('device_list') }}">List</a>
+                                </li>
+                            </ul>
+                        </li>
+                        <li>
+                            <a href="{{ url_for('geo_list') }}">
+                                <i class="fas fa-map-marker-alt"></i>Geolocation</a>
+                        </li>
+                        <li>
+                            <a href="{{ url_for('stats_add') }}">
+                                <i class="fas fa-chart-bar"></i>Statistics</a>
+                        </li>
+                        <li>
+                            <a href="{{ url_for('app_logout') }}">
+                                <i class="fa fa-reply"></i>Logout</a>
+                        </li>
+                    </ul>
+                </div>
+            </nav>
+        </header>
+        <!-- END HEADER MOBILE-->
+
+        <!-- MENU SIDEBAR-->
+        <aside class="menu-sidebar d-none d-lg-block">
+            <div class="logo">
+                <a href="{{ url_for('home') }}">
+                    <img src="{{ url_for('static', filename='images/icon/logo.png') }}"/>
+                </a>
+            </div>
+            <div class="menu-sidebar__content js-scrollbar1">
+                <nav class="navbar-sidebar">
+                    <ul class="list-unstyled navbar__list">
+                        <li class="has-sub">
+                            <a class="js-arrow" href="#">
+                                <i class="fas fa-desktop"></i>Devices</a>
+                            <ul class="list-unstyled navbar__sub-list js-sub-list">
+                                <li>
+                                    <a href="{{ url_for('device_add') }}">Add</a>
+                                </li>
+                                <li>
+                                    <a href="{{ url_for('device_list') }}">List</a>
+                                </li>
+                            </ul>
+                        </li>
+                        <li>
+                            <a href="{{ url_for('geo_list') }}">
+                                <i class="fas fa-map-marker-alt"></i>Geolocation</a>
+                        </li>
+                        <li>
+                            <a href="{{ url_for('stats_add') }}">
+                                <i class="fas fa-chart-bar"></i>Statistics</a>
+                        </li>
+                        <li>
+                            <a href="{{ url_for('app_logout') }}">
+                                <i class="fa fa-reply"></i>Logout</a>
+                        </li>
+                    </ul>
+                </nav>
+            </div>
+        </aside>
+        <!-- END MENU SIDEBAR-->
+
+        <!-- PAGE CONTAINER-->
+        <div class="page-container">
+            <!-- MAIN CONTENT-->
+            <div class="main-content">
+                <div class="section__content section__content--p30">
+                    <div class="container-fluid">
+                        <!-- mensajes flash -->
+                        {% with messages = get_flashed_messages(with_categories=true) %}
+                            {% if messages %}
+                                <div class="row">
+                                    <div class="col-md-7">
+                                        {% for category, message in messages %}
+                                        {% if category == 'success' %}
+                                            <div class="sufee-alert alert with-close alert-success alert-dismissible fade show">
+                                                <span class="badge badge-pill badge-success">{{ category }}</span>
+                                                {{ message }}
+                                                <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                                                    <span aria-hidden="true">×</span>
+                                                </button>
+                                            </div>
+                                        {% elif category == 'error' %}
+                                            <div class="sufee-alert alert with-close alert-danger alert-dismissible fade show">
+                                                <span class="badge badge-pill badge-danger">{{ category }}</span>
+                                                {{ message }}
+                                                <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                                                    <span aria-hidden="true">×</span>
+                                                </button>
+                                            </div>
+                                        {% endif %}
+                                        {% endfor %}
+                                    </div>
+                                </div>
+                            {% endif %}
+                        {% endwith %}
+                        <div class="row">
+                            <div class="col-md-3">
+                                <div class="card">
+                                    <div class="card-header">
+                                        <strong class="card-title mb-3">Devices</strong>
+                                    </div>
+                                    <div class="card-body">
+                                        <div class="mx-auto d-block">
+                                            <a href="{{ url_for('device_add') }}">
+                                                <img class="rounded-circle mx-auto d-block" src="{{ url_for('static', filename='images/icon/add-128.png') }}" alt="Card image cap">
+                                            </a>
+                                        </div>
+                                        <hr>
+                                        <h5 class="text-sm-center mt-2 mb-1"><a href="https://www.google.com/">Add</a></h5>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- END PAGE CONTAINER-->
+
+    </div>
+
+    <!-- Jquery JS-->
+    <script src="{{ url_for('static', filename='vendor/jquery-3.2.1.min.js') }}"></script>
+    
+    <!-- Bootstrap JS-->
+    <script src="{{ url_for('static', filename='vendor/bootstrap-4.1/popper.min.js') }}"></script>
+    <script src="{{ url_for('static', filename='vendor/bootstrap-4.1/bootstrap.min.js') }}"></script>
+    
+    <!-- Vendor JS-->
+    <script src="{{ url_for('static', filename='vendor/slick/slick.min.js') }}"></script>
+    <script src="{{ url_for('static', filename='vendor/wow/wow.min.js') }}"></script>
+    <script src="{{ url_for('static', filename='vendor/animsition/animsition.min.js') }}"></script>
+    <script src="{{ url_for('static', filename='vendor/bootstrap-progressbar/bootstrap-progressbar.min.js') }}"></script>
+    <script src="{{ url_for('static', filename='vendor/counter-up/jquery.waypoints.min.js') }}"></script>
+    <script src="{{ url_for('static', filename='vendor/counter-up/jquery.counterup.min.js') }}"></script>
+    <script src="{{ url_for('static', filename='vendor/circle-progress/circle-progress.min.js') }}"></script>
+    <script src="{{ url_for('static', filename='vendor/perfect-scrollbar/perfect-scrollbar.js') }}"></script>
+    <script src="{{ url_for('static', filename='vendor/chartjs/Chart.bundle.min.js') }}"></script>
+    <script src="{{ url_for('static', filename='vendor/select2/select2.min.js') }}"></script>
+
+
+
+    
+
+    <!-- Main JS-->
+    <script src="{{ url_for('static', filename='js/main.js') }}"></script>
+    
+
+</body>
+
+</html>
+<!-- end document-->

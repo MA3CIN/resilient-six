@@ -1,7 +1,9 @@
 {
   "ExpandedNodes": [
-    ""
+    "",
+    "\\frontend",
+    "\\frontend\\vendor"
   ],
-  "SelectedNode": "\\C:\\Users\\albah\\Source\\Repos\\resilient-six",
+  "SelectedNode": "\\frontend\\js",
   "PreviewInSolutionExplorer": false
 }
