@@ -25,4 +25,4 @@ def get_recent_values(device, metric):
     return rov  
 
 if __name__ == '__main__':
-    app.run()
+    app.run(port=3002)

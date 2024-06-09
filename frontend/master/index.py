@@ -102,4 +102,4 @@ def app_logout():
     return render_template('login.html')
 
 if __name__ == "__main__":
-    app.run()
+    app.run(port=5000)
