@@ -116,4 +116,4 @@ def category_add():
     return jsonify(success=True)
 
 if __name__ == '__main__':
-    app.run()
+    app.run(port=3000)
