@@ -23,7 +23,7 @@ spec:
   parameters:
     keyvaultName: "resilientsixkeyvault1" # The name of the Azure Key Vault
     useVMManagedIdentity: "true"
-    userAssignedIdentityID: "646e4557-2b6b-488b-8ecf-a34ec3190cd5" # The clientId of the AKS
+    userAssignedIdentityID: "646e4557-2b6b-488b-8ecf-a34ec3190cd5" # The clientId of the AKS cluster
     # this section describes the objects pulled from Azure Key Vault
     objects: |
       array:
