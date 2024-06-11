@@ -21,20 +21,20 @@ spec:
         - objectName: cert-demo
           key: tls.crt
   parameters:
-    keyvaultName: "resilientsixkeyvault1" # The name of the Azure Key Vault
+    keyvaultName: "resilientsixkeyvault3" # The name of the Azure Key Vault
     useVMManagedIdentity: "true"
-    userAssignedIdentityID: "646e4557-2b6b-488b-8ecf-a34ec3190cd5" # The clientId of the AKS cluster
+    userAssignedIdentityID: "17a3e391-8a69-4f11-b913-7e4dffb28d14" # The clientId of the AKS cluster
     # this section describes the objects pulled from Azure Key Vault
     objects: |
       array:
         - |
-          objectName: DB_URL
+          objectName: DB-URL
           objectType: secret
         - |
-          objectName: DB_USER                
+          objectName: DB-USER                
           objectType: secret
         - |
-          objectName: DB_PSWD                
+          objectName: DB-PSWD                
           objectType: secret
     # the tenant ID containing the Azure Key Vault instance, you can find it in Azure Portal
     tenantId: "3b50229c-cd78-4588-9bcf-97b7629e2f0f"
