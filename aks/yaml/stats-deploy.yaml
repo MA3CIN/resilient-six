@@ -16,7 +16,6 @@ spec:
     spec:
       containers:
         - name: stats-deploy
-          # docker.io/marcinziolkowski/stats-service:v1.0.1
           image: resilientsixregistry.azurecr.io/stats-service:v1.0.3
           env:
             - name: FLASK_RUN_PORT

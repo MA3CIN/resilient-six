@@ -16,6 +16,15 @@ DB_URL = os.getenv('DB_URL', 'http://127.0.0.1:3306')
 user="root"
 pwd="mysql"
 
+if os.path.isdir("/mnt/secrets-store"):
+  with open('/mnt/secrets-store/DB-URL', 'r') as data:
+    DB_URL = data.read()
+  with open('/mnt/secrets-store/DB-PSWD', 'r') as data:
+    pwd = data.read()
+  with open('/mnt/secrets-store/DB-USER', 'r') as data:
+    user = data.read()
+
+
 db = GeolocationDBConnector(
   host=DB_URL,
   user=user,
