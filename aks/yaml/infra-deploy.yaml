@@ -16,7 +16,7 @@ spec:
     spec:
       containers:
         - name: infra-deploy
-          image: resilientsixregistry.azurecr.io/infra-service:v1.0.3
+          image: resilientsixregistry.azurecr.io/infra-service:v2.0.3
           ports:
             - containerPort: 80
           env:
@@ -29,6 +29,17 @@ spec:
             requests:
               memory: "128Mi"
               cpu: "250m"
+      #     volumeMounts:
+      #       - name: secrets-store01-inline
+      #         mountPath: "/mnt/secrets-store"
+      #         readOnly: true
+      # volumes:
+      #   - name: secrets-store01-inline
+      #     csi:
+      #       driver: secrets-store.csi.k8s.io
+      #       readOnly: true
+      #       volumeAttributes:
+      #         secretProviderClass: "keyvault-name"
 ---
 apiVersion: v1
 kind: Service

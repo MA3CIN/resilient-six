@@ -25,6 +25,15 @@ db = InfraDBConnector(
   database="devices"
 )
 
+@app.route('/hello', methods=['GET'])
+def get_hello():
+    """
+    Used as a healthcheck.
+    """
+    logger.info("Hello!.")
+    return jsonify("Hello!")
+
+
 @app.route('/devices', methods=['GET'])
 def get_all_registered_devices():
     """
