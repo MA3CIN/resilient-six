@@ -1,0 +1,230 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <!-- Required meta tags-->
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <!-- Title Page-->
+    <title>Resilient Six - Home</title>
+
+    <!-- Fontfaces CSS-->
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/font-face.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='vendor/font-awesome-5/css/fontawesome-all.min.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='vendor/font-awesome-4.7/css/font-awesome.min.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='vendor/mdi-font/css/material-design-iconic-font.min.css') }}">
+
+    <!-- Bootstrap CSS-->
+    <link rel="stylesheet" href="{{ url_for('static', filename='vendor/bootstrap-4.1/bootstrap.min.css') }}">
+
+    <!-- Vendor CSS-->
+    <link rel="stylesheet" href="{{ url_for('static', filename='vendor/animsition/animsition.min.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='vendor/bootstrap-progressbar/bootstrap-progressbar-3.3.4.min.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='vendor/wow/animate.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='vendor/css-hamburgers/hamburgers.min.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='vendor/slick/slick.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='vendor/select2/select2.min.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='vendor/perfect-scrollbar/perfect-scrollbar.css') }}">
+
+    <!-- Main CSS-->
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/theme.css') }}">
+
+</head>
+
+<body class="animsition">
+    <div class="page-wrapper">
+        <!-- HEADER MOBILE-->
+        <header class="header-mobile d-block d-lg-none">
+            <div class="header-mobile__bar">
+                <div class="container-fluid">
+                    <div class="header-mobile-inner">
+                        <a class="logo" href="{{ url_for('home') }}">
+                            <img src="{{ url_for('static', filename='images/icon/logo.png') }}"/>
+                        </a>
+                        <button class="hamburger hamburger--slider" type="button">
+                            <span class="hamburger-box">
+                                <span class="hamburger-inner"></span>
+                            </span>
+                        </button>
+                    </div>
+                </div>
+            </div>
+            <nav class="navbar-mobile">
+                <div class="container-fluid">
+                    <ul class="navbar-mobile__list list-unstyled">
+                        <li class="has-sub">
+                            <a class="js-arrow" href="#">
+                                <i class="fas fa-desktop"></i>Devices</a>
+                            <ul class="navbar-mobile-sub__list list-unstyled js-sub-list">
+                                <li>
+                                    <a href="{{ url_for('device_add') }}">Add</a>
+                                </li>
+                                <li>
+                                    <a href="{{ url_for('device_list') }}">List</a>
+                                </li>
+                            </ul>
+                        </li>
+                        <li>
+                            <a href="{{ url_for('geo_list') }}">
+                                <i class="fas fa-map-marker-alt"></i>Geolocation</a>
+                        </li>
+                        <li>
+                            <a href="{{ url_for('stats_add') }}">
+                                <i class="fas fa-chart-bar"></i>Statistics</a>
+                        </li>
+                        <li>
+                            <a href="{{ url_for('app_logout') }}">
+                                <i class="fa fa-reply"></i>Logout</a>
+                        </li>
+                    </ul>
+                </div>
+            </nav>
+        </header>
+        <!-- END HEADER MOBILE-->
+
+        <!-- MENU SIDEBAR-->
+        <aside class="menu-sidebar d-none d-lg-block">
+            <div class="logo">
+                <a href="{{ url_for('home') }}">
+                    <img src="{{ url_for('static', filename='images/icon/logo.png') }}"/>
+                </a>
+            </div>
+            <div class="menu-sidebar__content js-scrollbar1">
+                <nav class="navbar-sidebar">
+                    <ul class="list-unstyled navbar__list">
+                        <li class="has-sub">
+                            <a class="js-arrow" href="#">
+                                <i class="fas fa-desktop"></i>Devices</a>
+                            <ul class="list-unstyled navbar__sub-list js-sub-list">
+                                <li>
+                                    <a href="{{ url_for('device_add') }}">Add</a>
+                                </li>
+                                <li>
+                                    <a href="{{ url_for('device_list') }}">List</a>
+                                </li>
+                            </ul>
+                        </li>
+                        <li>
+                            <a href="{{ url_for('geo_list') }}">
+                                <i class="fas fa-map-marker-alt"></i>Geolocation</a>
+                        </li>
+                        <li>
+                            <a href="{{ url_for('stats_add') }}">
+                                <i class="fas fa-chart-bar"></i>Statistics</a>
+                        </li>
+                        <li>
+                            <a href="{{ url_for('app_logout') }}">
+                                <i class="fa fa-reply"></i>Logout</a>
+                        </li>
+                    </ul>
+                </nav>
+            </div>
+        </aside>
+        <!-- END MENU SIDEBAR-->
+
+        <!-- PAGE CONTAINER-->
+        <div class="page-container">
+            <!-- MAIN CONTENT-->
+            <div class="main-content">
+                <div class="section__content section__content--p30">
+                    <div class="container-fluid">
+                        <div class="row">
+                            <div class="col-lg-8">
+                                <div class="card">
+                                    <div class="card-header">
+                                        <strong>Add</strong> Geolocation
+                                    </div>
+                                    <div class="card-body card-block">
+                                        <form action="{{ url_for('geo_add_position') }}" method="post" enctype="multipart/form-data" class="form-horizontal">
+                                            <input type="hidden" id="device_id" name="device_id" value="{{device.model_id}}">
+                                            <div class="row form-group">
+                                                <div class="col col-md-3">
+                                                    <label for="text-input" class=" form-control-label">Name</label>
+                                                </div>
+                                                <div class="col-12 col-md-9">
+                                                    <input type="text" id="name-input" name="name-input" class="form-control" disabled="" value="{{device.model_name}}">
+                                                </div>
+                                            </div>
+                                            <div class="row form-group">
+                                                <div class="col col-md-3">
+                                                    <label for="text-input" class=" form-control-label">Category</label>
+                                                </div>
+                                                <div class="col-12 col-md-9">
+                                                    <input type="text" id="text-input" name="text-input" class="form-control" disabled="" value="{{device.category_name}}">
+                                                </div>
+                                            </div>
+                                            <div class="row form-group">
+                                                <div class="col col-md-3">
+                                                    <label for="select" class=" form-control-label">Manufacture</label>
+                                                </div>
+                                                <div class="col-12 col-md-9">
+                                                    <select name="manufacture" id="manufacture" class="form-control" disabled="">
+                                                        <option value="0">{{device.manufacturer_name}}</option>
+                                                    </select>
+                                                </div>
+                                            </div>
+                                            <div class="alert alert-warning" role="alert">
+                                                Below enter the <strong>X</strong> and <strong>Y</strong>coordinates
+                                            </div>
+                                            <div class="row form-group">
+                                                <div class="col col-md-3">
+                                                    <label for="text-input" class=" form-control-label">X-Coordinate</label>
+                                                </div>
+                                                <div class="col-12 col-md-9">
+                                                    <input type="text" id="x_val" name="x_val" placeholder="e.g. 40.714" class="form-control">
+                                                </div>
+                                            </div>
+                                            <div class="row form-group">
+                                                <div class="col col-md-3">
+                                                    <label for="text-input" class=" form-control-label">Y-Coordinate</label>
+                                                </div>
+                                                <div class="col-12 col-md-9">
+                                                    <input type="text" id="y_val" name="y_val" placeholder="e.g. -74.006" class="form-control">
+                                                </div>
+                                            </div>
+                                            <div class="card-footer">
+                                                <button type="submit" class="btn btn-primary btn-sm">
+                                                    <i class="fa fa-dot-circle-o"></i> Submit
+                                                </button>
+                                                <button type="reset" class="btn btn-danger btn-sm">
+                                                    <i class="fa fa-ban"></i> Reset
+                                                </button>
+                                            </div>
+                                        </form>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- END PAGE CONTAINER-->
+
+    </div>
+
+     <!-- Jquery JS-->
+     <script src="{{ url_for('static', filename='vendor/jquery-3.2.1.min.js') }}"></script>
+     <!-- Bootstrap JS-->
+     <script src="{{ url_for('static', filename='vendor/bootstrap-4.1/popper.min.js') }}"></script>
+     <script src="{{ url_for('static', filename='vendor/bootstrap-4.1/bootstrap.min.js') }}"></script>
+     <!-- Vendor JS       -->
+     <script src="{{ url_for('static', filename='vendor/slick/slick.min.js') }}"></script>
+     <script src="{{ url_for('static', filename='vendor/wow/wow.min.js') }}"></script>
+     <script src="{{ url_for('static', filename='vendor/animsition/animsition.min.js') }}"></script>
+     <script src="{{ url_for('static', filename='vendor/bootstrap-progressbar/bootstrap-progressbar.min.js') }}"></script>
+     <script src="{{ url_for('static', filename='vendor/counter-up/jquery.waypoints.min.js') }}"></script>
+     <script src="{{ url_for('static', filename='vendor/counter-up/jquery.counterup.min.js') }}"></script>
+     <script src="{{ url_for('static', filename='vendor/circle-progress/circle-progress.min.js') }}"></script>
+     <script src="{{ url_for('static', filename='vendor/perfect-scrollbar/perfect-scrollbar.js') }}"></script>
+     <script src="{{ url_for('static', filename='vendor/chartjs/Chart.bundle.min.js') }}"></script>
+     <script src="{{ url_for('static', filename='vendor/select2/select2.min.js') }}"></script>
+ 
+     <!-- Main JS-->
+     <script src="{{ url_for('static', filename='js/main.js') }}"></script>
+
+</body>
+
+</html>
+<!-- end document-->

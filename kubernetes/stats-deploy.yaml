@@ -16,7 +16,6 @@ spec:
     spec:
       containers:
         - name: stats-deploy
-          # docker.io/marcinziolkowski/stats-service:v1.0.1
           image: marcinziolkowski/stats-service:v1.0.1
           env:
             - name: FLASK_RUN_PORT
