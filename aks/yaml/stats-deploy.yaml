@@ -16,7 +16,7 @@ spec:
     spec:
       containers:
         - name: stats-deploy
-          image: marcinziolkowski/stats-service:v1.0.1
+          image: resilientsixregistry.azurecr.io/stats-service:v2.0.3
           env:
             - name: FLASK_RUN_PORT
               value: "5000"
@@ -31,6 +31,17 @@ spec:
             requests:
               memory: "128Mi"
               cpu: "250m"
+      #     volumeMounts:
+      #       - name: secrets-store01-inline
+      #         mountPath: "/mnt/secrets-store"
+      #         readOnly: true
+      # volumes:
+      #   - name: secrets-store01-inline
+      #     csi:
+      #       driver: secrets-store.csi.k8s.io
+      #       readOnly: true
+      #       volumeAttributes:
+      #         secretProviderClass: "keyvault-name"
 ---
 apiVersion: v1
 kind: Service
@@ -43,3 +54,16 @@ spec:
     - protocol: TCP
       port: 8080
       targetPort: 5000
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: stats-service-public
+spec:
+  type: LoadBalancer
+  ports:
+    - protocol: TCP
+      port: 8080
+      targetPort: 5000
+  selector:
+    app: stats-deploy

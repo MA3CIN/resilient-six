@@ -10,12 +10,29 @@ logger = logging.Logger(__name__)
 
 DB_URL = os.getenv('DB_URL', 'http://127.0.0.1:3306/') 
 
+if os.path.isdir("/mnt/secrets-store"):
+  with open('/mnt/secrets-store/DB-URL', 'r') as data:
+    DB_URL = data.read()
+  with open('/mnt/secrets-store/DB-PSWD', 'r') as data:
+    pwd = data.read()
+  with open('/mnt/secrets-store/DB-USER', 'r') as data:
+    user = data.read()
+
 db = InfraDBConnector(
   host=DB_URL,
   user="root",
   pwd="mysql",
   database="devices"
 )
+
+@app.route('/hello', methods=['GET'])
+def get_hello():
+    """
+    Used as a healthcheck.
+    """
+    logger.info("Hello!.")
+    return jsonify("Hello!")
+
 
 @app.route('/devices', methods=['GET'])
 def get_all_registered_devices():
