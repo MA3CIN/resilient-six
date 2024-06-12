@@ -20,6 +20,8 @@ spec:
           env:
             - name: FLASK_RUN_PORT
               value: "5000"
+            - name: INFRA_URL
+              value: infra-service
           ports:
             - containerPort: 80
           resources:
