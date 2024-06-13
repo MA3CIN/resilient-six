@@ -1,0 +1,441 @@
+{
+  "version": "2.2.0",
+  "summary": {
+    "title": "Threat model for Kubernetes high availability demo",
+    "owner": "Jakub Gorczynski",
+    "description": "Application in a cloud on at least 3 simple types of microservices\n Assumptions - \nautomation in infrastructure build and and setup – usage of a tools like Terraform, AWS CDK, Ansible, Chef, Puppet, etc - \ncontrol version system usage, like git, -\n at least three types of microservices, - \ndatabase and state should be specific and owned by each microservice type separately, but it is required for exactly two types of microservices to have its own private mirror or cache of some subset of data/state owned as authoritative by other microservice type, to be used in scenarios when the strictly integral copy of these data subset is not necessary. \nWhen the strict integrity for foreign data is still necessary, data should be reached by direct requests to the microservice owner of these data instead of usage of any local mirror or cache, -\n authorization and session management, -\n identities: administrator + identities federated via OAuth, for example with Google accounts, - user interface GUI (if you have any team member frontend oriented) - \nmonitoring of the service,\n collecting all the logs -\n",
+    "id": 0
+  },
+  "detail": {
+    "contributors": [
+      {
+        "name": "Jakub Gorczynski"
+      }
+    ],
+    "diagrams": [
+      {
+        "id": 0,
+        "title": "resilient-six-stride",
+        "diagramType": "STRIDE",
+        "placeholder": "New STRIDE diagram description",
+        "thumbnail": "./public/content/images/thumbnail.stride.jpg",
+        "version": "2.2.0",
+        "cells": [
+          {
+            "position": {
+              "x": 30,
+              "y": 30
+            },
+            "size": {
+              "width": 112.5,
+              "height": 60
+            },
+            "attrs": {
+              "text": {
+                "text": "Client"
+              },
+              "body": {
+                "stroke": "#333333",
+                "strokeWidth": 1.5,
+                "strokeDasharray": null
+              }
+            },
+            "visible": true,
+            "shape": "actor",
+            "zIndex": 1,
+            "id": "93863029-190e-400e-bb45-064b29c5523f",
+            "data": {
+              "type": "tm.Actor",
+              "name": "Client",
+              "description": "",
+              "outOfScope": false,
+              "reasonOutOfScope": "",
+              "hasOpenThreats": false,
+              "providesAuthentication": false,
+              "threats": []
+            }
+          },
+          {
+            "shape": "flow",
+            "attrs": {
+              "line": {
+                "stroke": "#333333",
+                "targetMarker": {
+                  "name": "block"
+                },
+                "sourceMarker": {
+                  "name": ""
+                },
+                "strokeDasharray": null
+              }
+            },
+            "width": 200,
+            "height": 100,
+            "zIndex": 10,
+            "connector": "smooth",
+            "data": {
+              "type": "tm.Flow",
+              "name": "HTTP Request",
+              "description": "",
+              "outOfScope": false,
+              "reasonOutOfScope": "",
+              "hasOpenThreats": false,
+              "isBidirectional": false,
+              "isEncrypted": false,
+              "isPublicNetwork": false,
+              "protocol": "",
+              "threats": [
+                {
+                  "id": "cf6be70b-c0ce-4b03-a49d-7281fb36d0dc",
+                  "title": "XSS",
+                  "status": "Mitigated",
+                  "severity": "Medium",
+                  "type": "Tampering",
+                  "description": "Cross site scripting ",
+                  "mitigation": "Input sanitisation",
+                  "modelType": "STRIDE",
+                  "new": false,
+                  "number": 1,
+                  "score": ""
+                }
+              ]
+            },
+            "id": "cde9722a-ff4c-40a4-91c8-52bbd0d42269",
+            "labels": [
+              "HTTP Request"
+            ],
+            "source": {
+              "cell": "93863029-190e-400e-bb45-064b29c5523f"
+            },
+            "target": {
+              "cell": "62e49d4d-edf0-44bc-90ce-9b541bb745c4"
+            },
+            "vertices": [
+              {
+                "x": 86.25,
+                "y": 220
+              },
+              {
+                "x": 120,
+                "y": 270
+              },
+              {
+                "x": 220,
+                "y": 310
+              },
+              {
+                "x": 250,
+                "y": 310
+              }
+            ]
+          },
+          {
+            "shape": "flow",
+            "attrs": {
+              "line": {
+                "stroke": "#333333",
+                "targetMarker": {
+                  "name": "block"
+                },
+                "sourceMarker": {
+                  "name": ""
+                },
+                "strokeDasharray": null
+              }
+            },
+            "width": 200,
+            "height": 100,
+            "zIndex": 10,
+            "connector": "smooth",
+            "data": {
+              "type": "tm.Flow",
+              "name": "HTTP Response",
+              "description": "",
+              "outOfScope": false,
+              "reasonOutOfScope": "",
+              "hasOpenThreats": false,
+              "isBidirectional": false,
+              "isEncrypted": false,
+              "isPublicNetwork": false,
+              "protocol": "",
+              "threats": []
+            },
+            "id": "da4e149e-8d6b-4831-b408-8ec00c4d36df",
+            "labels": [
+              "HTTP Response"
+            ],
+            "source": {
+              "cell": "62e49d4d-edf0-44bc-90ce-9b541bb745c4"
+            },
+            "target": {
+              "cell": "93863029-190e-400e-bb45-064b29c5523f"
+            },
+            "vertices": [
+              {
+                "x": 330,
+                "y": 90
+              }
+            ]
+          },
+          {
+            "shape": "flow",
+            "attrs": {
+              "line": {
+                "stroke": "red",
+                "strokeWidth": 2.5,
+                "targetMarker": {
+                  "name": "block"
+                },
+                "sourceMarker": {
+                  "name": ""
+                },
+                "strokeDasharray": null
+              }
+            },
+            "width": 200,
+            "height": 100,
+            "zIndex": 10,
+            "connector": "smooth",
+            "data": {
+              "type": "tm.Flow",
+              "name": "Potential attack request",
+              "description": "",
+              "outOfScope": false,
+              "reasonOutOfScope": "",
+              "hasOpenThreats": true,
+              "isBidirectional": false,
+              "isEncrypted": false,
+              "isPublicNetwork": false,
+              "protocol": "",
+              "threats": [
+                {
+                  "id": "483a55a3-f30d-419c-99f3-58e473dd2ea0",
+                  "title": "New STRIDE threat",
+                  "status": "Open",
+                  "severity": "Medium",
+                  "type": "Tampering",
+                  "description": "Provide a description for this threat",
+                  "mitigation": "Provide remediation for this threat or a reason if status is N/A",
+                  "modelType": "STRIDE",
+                  "new": true,
+                  "number": 0,
+                  "score": ""
+                }
+              ]
+            },
+            "id": "868dcc0d-feeb-4ee7-9f4f-0eb282dcd77e",
+            "labels": [
+              "Potential attack request"
+            ],
+            "source": {
+              "cell": "45c9a776-8744-45e4-a333-80dcbc143ce6"
+            },
+            "target": {
+              "cell": "62e49d4d-edf0-44bc-90ce-9b541bb745c4"
+            },
+            "vertices": [
+              {
+                "x": 500,
+                "y": 190
+              }
+            ]
+          },
+          {
+            "shape": "trust-boundary-curve",
+            "width": 200,
+            "height": 100,
+            "zIndex": 10,
+            "connector": "smooth",
+            "data": {
+              "type": "tm.Boundary",
+              "name": "Public internet",
+              "description": "",
+              "isTrustBoundary": true,
+              "hasOpenThreats": false
+            },
+            "id": "1c1e825a-1750-4b07-8822-561ef6566f36",
+            "labels": [
+              "Public internet"
+            ],
+            "source": {
+              "x": 10,
+              "y": 230
+            },
+            "target": {
+              "x": 860,
+              "y": 130
+            },
+            "vertices": [
+              {
+                "x": 330,
+                "y": 140
+              },
+              {
+                "x": 670,
+                "y": 120
+              }
+            ]
+          },
+          {
+            "shape": "flow",
+            "attrs": {
+              "line": {
+                "stroke": "#333333",
+                "targetMarker": {
+                  "name": "block"
+                },
+                "sourceMarker": {
+                  "name": ""
+                },
+                "strokeDasharray": null
+              }
+            },
+            "width": 200,
+            "height": 100,
+            "zIndex": 10,
+            "connector": "smooth",
+            "data": {
+              "type": "tm.Flow",
+              "name": "Audit",
+              "description": "",
+              "outOfScope": false,
+              "reasonOutOfScope": "",
+              "hasOpenThreats": false,
+              "isBidirectional": false,
+              "isEncrypted": false,
+              "isPublicNetwork": false,
+              "protocol": "",
+              "threats": []
+            },
+            "id": "8cb081c6-9edd-4cdf-ba9e-508102169902",
+            "labels": [
+              "Audit"
+            ],
+            "source": {
+              "cell": "62e49d4d-edf0-44bc-90ce-9b541bb745c4"
+            },
+            "target": {
+              "cell": "96d19f31-fdc6-48a7-b6a7-72b0351fe8bd"
+            }
+          },
+          {
+            "position": {
+              "x": 310,
+              "y": 290
+            },
+            "size": {
+              "width": 120,
+              "height": 100
+            },
+            "attrs": {
+              "text": {
+                "text": "Azure cloud\napplication"
+              },
+              "body": {
+                "stroke": "#333333",
+                "strokeWidth": 1.5,
+                "strokeDasharray": null
+              }
+            },
+            "visible": true,
+            "shape": "process",
+            "zIndex": 11,
+            "id": "62e49d4d-edf0-44bc-90ce-9b541bb745c4",
+            "data": {
+              "type": "tm.Process",
+              "name": "Azure cloud\napplication",
+              "description": "",
+              "outOfScope": false,
+              "reasonOutOfScope": "",
+              "hasOpenThreats": false,
+              "handlesCardPayment": false,
+              "handlesGoodsOrServices": false,
+              "isWebApplication": true,
+              "privilegeLevel": "",
+              "threats": []
+            }
+          },
+          {
+            "position": {
+              "x": 540,
+              "y": 30
+            },
+            "size": {
+              "width": 112.5,
+              "height": 60
+            },
+            "attrs": {
+              "text": {
+                "text": "Untrusted actor \n(e.g. bot)"
+              },
+              "body": {
+                "stroke": "#333333",
+                "strokeWidth": 1.5,
+                "strokeDasharray": null
+              }
+            },
+            "visible": true,
+            "shape": "actor",
+            "zIndex": 12,
+            "id": "45c9a776-8744-45e4-a333-80dcbc143ce6",
+            "data": {
+              "type": "tm.Actor",
+              "name": "Untrusted actor \n(e.g. bot)",
+              "description": "",
+              "outOfScope": false,
+              "reasonOutOfScope": "",
+              "hasOpenThreats": false,
+              "providesAuthentication": false,
+              "threats": []
+            }
+          },
+          {
+            "position": {
+              "x": 653,
+              "y": 370
+            },
+            "size": {
+              "width": 120,
+              "height": 60
+            },
+            "attrs": {
+              "text": {
+                "text": "Logging"
+              },
+              "topLine": {
+                "strokeWidth": 1.5,
+                "strokeDasharray": null
+              },
+              "bottomLine": {
+                "strokeWidth": 1.5,
+                "strokeDasharray": null
+              }
+            },
+            "visible": true,
+            "shape": "store",
+            "zIndex": 13,
+            "id": "96d19f31-fdc6-48a7-b6a7-72b0351fe8bd",
+            "data": {
+              "type": "tm.Store",
+              "name": "Logging",
+              "description": "",
+              "outOfScope": false,
+              "reasonOutOfScope": "",
+              "hasOpenThreats": false,
+              "isALog": false,
+              "isEncrypted": false,
+              "isSigned": false,
+              "storesCredentials": false,
+              "storesInventory": false,
+              "threats": []
+            }
+          }
+        ],
+        "description": "threat model of the service (using STRIDE framework)"
+      }
+    ],
+    "diagramTop": 1,
+    "reviewer": "Marcin Ziolkowski, Mateusz Wasilewski",
+    "threatTop": 4
+  }
+}
