@@ -63,6 +63,6 @@ Summary:
 (base) ➜  services git:(vuln-scanning) ✗
 ```
 
-### threat model
+### STRIDE threat model
 
-TBD
+Threat modeling has been described using STRIDE framework and can be accessed in the **threat-model** folder. JSON raw diagram file and the latest version of PDF report is available there.
