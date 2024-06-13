@@ -32,8 +32,8 @@
                 "text": "Azure AKS Cluster"
               }
             },
-            "id": "f5994c5a-e48d-4514-8d32-93fc66cc0fbd",
             "zIndex": -1,
+            "id": "f5994c5a-e48d-4514-8d32-93fc66cc0fbd",
             "data": {
               "type": "tm.BoundaryBox",
               "name": "Azure AKS Cluster",
@@ -57,8 +57,8 @@
                 "text": "Azure DB for MySQL"
               }
             },
-            "id": "15aa08fd-4c6f-476c-95db-7410c23acd0f",
             "zIndex": -1,
+            "id": "15aa08fd-4c6f-476c-95db-7410c23acd0f",
             "data": {
               "type": "tm.BoundaryBox",
               "name": "Azure DB for MySQL",
@@ -82,8 +82,8 @@
                 "text": "Common Azure \nresource group"
               }
             },
-            "id": "e25d92ff-4e0e-43e8-a689-add909b31a22",
             "zIndex": -1,
+            "id": "e25d92ff-4e0e-43e8-a689-add909b31a22",
             "data": {
               "type": "tm.BoundaryBox",
               "name": "Common Azure \nresource group",
@@ -107,8 +107,8 @@
                 "text": "Azure Virtual Network (VNET)"
               }
             },
-            "id": "ec7b8d0b-d25e-46bd-af36-5efa42457c7b",
             "zIndex": -1,
+            "id": "ec7b8d0b-d25e-46bd-af36-5efa42457c7b",
             "data": {
               "type": "tm.BoundaryBox",
               "name": "Azure Virtual Network (VNET)",
@@ -132,8 +132,8 @@
                 "text": "Service Mesh"
               }
             },
-            "id": "c14e0cfa-f8d7-4e1d-b58d-c810d0a9882d",
             "zIndex": -1,
+            "id": "c14e0cfa-f8d7-4e1d-b58d-c810d0a9882d",
             "data": {
               "type": "tm.BoundaryBox",
               "name": "Service Mesh",
@@ -810,7 +810,6 @@
             "target": {
               "cell": "cb0f33af-b83d-427b-9a1d-be0a08b06b68"
             },
-            "vertices": [],
             "tools": {
               "items": [
                 "boundary",
@@ -820,7 +819,8 @@
                 "target-arrowhead"
               ],
               "name": null
-            }
+            },
+            "vertices": []
           },
           {
             "shape": "flow",
@@ -942,15 +942,15 @@
               "threats": []
             },
             "id": "65148d62-b33a-40ee-818d-d3c51dc5891b",
+            "labels": [
+              "mutual TLS"
+            ],
             "source": {
               "cell": "244b304f-dac0-497e-a232-5061248aaa8e"
             },
             "target": {
               "cell": "1c3ac60b-aaae-4fe6-8d31-960261190354"
-            },
-            "labels": [
-              "mutual TLS"
-            ]
+            }
           },
           {
             "shape": "flow",
@@ -1023,15 +1023,15 @@
               "threats": []
             },
             "id": "378edf81-c4a8-48fc-99ce-49596b06b730",
+            "labels": [
+              "mutual TLS"
+            ],
             "source": {
               "cell": "56e2a372-2902-4421-aea3-2923d78af82a"
             },
             "target": {
               "cell": "244b304f-dac0-497e-a232-5061248aaa8e"
-            },
-            "labels": [
-              "mutual TLS"
-            ]
+            }
           },
           {
             "shape": "flow",
@@ -1065,15 +1065,15 @@
               "threats": []
             },
             "id": "f0553e5d-ebe8-463c-8c34-e096bbd83225",
+            "labels": [
+              "Geolocation\nrequest"
+            ],
             "source": {
               "cell": "1be369b1-2d7d-4aea-8ca4-eae1a516e01b"
             },
             "target": {
               "cell": "56e2a372-2902-4421-aea3-2923d78af82a"
-            },
-            "labels": [
-              "Geolocation\nrequest"
-            ]
+            }
           },
           {
             "shape": "flow",
@@ -1242,15 +1242,15 @@
               "threats": []
             },
             "id": "d059c15b-cc5d-4afd-8409-65f03e60d541",
+            "labels": [
+              "Usage"
+            ],
             "source": {
               "cell": "1c3ac60b-aaae-4fe6-8d31-960261190354"
             },
             "target": {
               "cell": "43216aeb-c0d4-4eaa-8161-a332648c450a"
-            },
-            "labels": [
-              "Usage"
-            ]
+            }
           },
           {
             "shape": "flow",
@@ -1284,15 +1284,15 @@
               "threats": []
             },
             "id": "2d895902-f733-4ca1-91ac-efad423b6d87",
+            "labels": [
+              "Usage"
+            ],
             "source": {
               "cell": "244b304f-dac0-497e-a232-5061248aaa8e"
             },
             "target": {
               "cell": "d94db922-ed8e-4ebc-a155-24ccff89dca7"
-            },
-            "labels": [
-              "Usage"
-            ]
+            }
           },
           {
             "shape": "flow",
@@ -1326,15 +1326,15 @@
               "threats": []
             },
             "id": "14430de9-a04b-494d-9e56-dd5f421b974b",
+            "labels": [
+              "Usage"
+            ],
             "source": {
               "cell": "56e2a372-2902-4421-aea3-2923d78af82a"
             },
             "target": {
               "cell": "cced4b58-6852-495e-8924-5abd0e559709"
-            },
-            "labels": [
-              "Usage"
-            ]
+            }
           },
           {
             "shape": "flow",
@@ -1368,15 +1368,15 @@
               "threats": []
             },
             "id": "f077a84a-bd24-4c52-a4e6-fa8787ee8b59",
+            "labels": [
+              "Caching"
+            ],
             "source": {
               "cell": "1c3ac60b-aaae-4fe6-8d31-960261190354"
             },
             "target": {
               "cell": "d94db922-ed8e-4ebc-a155-24ccff89dca7"
-            },
-            "labels": [
-              "Caching"
-            ]
+            }
           },
           {
             "shape": "flow",
@@ -1410,15 +1410,15 @@
               "threats": []
             },
             "id": "bff881b3-29d8-43cc-aed7-190ede1f5d4f",
+            "labels": [
+              "Caching"
+            ],
             "source": {
               "cell": "56e2a372-2902-4421-aea3-2923d78af82a"
             },
             "target": {
               "cell": "d94db922-ed8e-4ebc-a155-24ccff89dca7"
-            },
-            "labels": [
-              "Caching"
-            ]
+            }
           },
           {
             "shape": "flow",
@@ -1452,6 +1452,9 @@
               "threats": []
             },
             "id": "33147c54-b263-4c06-b350-775de2f44b22",
+            "labels": [
+              "Authentication\nrequest"
+            ],
             "source": {
               "cell": "cb0f33af-b83d-427b-9a1d-be0a08b06b68"
             },
@@ -1463,9 +1466,6 @@
                 "x": 290,
                 "y": 390
               }
-            ],
-            "labels": [
-              "Authentication\nrequest"
             ]
           },
           {
@@ -1500,6 +1500,9 @@
               "threats": []
             },
             "id": "f332d5e2-10eb-41f4-b2eb-32f604659348",
+            "labels": [
+              "Authorization\nresponse"
+            ],
             "source": {
               "cell": "22fd2eab-e798-4205-9969-e2428f3da905"
             },
@@ -1511,9 +1514,6 @@
                 "x": 400,
                 "y": 380
               }
-            ],
-            "labels": [
-              "Authorization\nresponse"
             ]
           },
           {
@@ -1548,15 +1548,15 @@
               "threats": []
             },
             "id": "ceb7a657-6a32-4a78-8580-dbbd2fda2b25",
+            "labels": [
+              "Get secrets"
+            ],
             "source": {
               "cell": "55da1c30-c462-471c-a611-11cf0c40943a"
             },
             "target": {
               "cell": "f5994c5a-e48d-4514-8d32-93fc66cc0fbd"
-            },
-            "labels": [
-              "Get secrets"
-            ]
+            }
           },
           {
             "shape": "flow",
@@ -1578,7 +1578,7 @@
             "connector": "smooth",
             "data": {
               "type": "tm.Flow",
-              "name": "Get\nsecrets",
+              "name": "Get\nimages",
               "description": "",
               "outOfScope": false,
               "reasonOutOfScope": "",
@@ -1590,14 +1590,24 @@
               "threats": []
             },
             "id": "deda0d60-df9a-4f06-8cef-3eaceb2b1d37",
+            "labels": [
+              "Get\nimages"
+            ],
             "source": {
               "cell": "29f44ba9-686c-492d-9c86-2742d22f8eb1"
             },
             "target": {
               "cell": "f5994c5a-e48d-4514-8d32-93fc66cc0fbd"
             },
-            "labels": [
-              "Get\nsecrets"
+            "vertices": [
+              {
+                "x": 430,
+                "y": 74.5
+              },
+              {
+                "x": 460,
+                "y": 100
+              }
             ]
           },
           {
@@ -1632,6 +1642,9 @@
               "threats": []
             },
             "id": "2243168c-d98f-49ac-9274-84d56e6e1e8d",
+            "labels": [
+              "Request"
+            ],
             "source": {
               "cell": "c1da910e-343a-443a-ace4-0f48d075c334"
             },
@@ -1643,9 +1656,6 @@
                 "x": 338,
                 "y": 690
               }
-            ],
-            "labels": [
-              "Request"
             ]
           },
           {
@@ -1939,8 +1949,8 @@
             },
             "visible": true,
             "shape": "process",
-            "id": "e90fbbcf-3bff-4c14-95c3-42fc0eede4a0",
             "zIndex": 19,
+            "id": "e90fbbcf-3bff-4c14-95c3-42fc0eede4a0",
             "data": {
               "type": "tm.Process",
               "name": "Application\nGateway\nIngress\nController",
@@ -1979,8 +1989,8 @@
             },
             "visible": true,
             "shape": "store",
-            "id": "43216aeb-c0d4-4eaa-8161-a332648c450a",
             "zIndex": 20,
+            "id": "43216aeb-c0d4-4eaa-8161-a332648c450a",
             "data": {
               "type": "tm.Store",
               "name": "Statistics DB",
@@ -2020,8 +2030,8 @@
             },
             "visible": true,
             "shape": "store",
-            "id": "d94db922-ed8e-4ebc-a155-24ccff89dca7",
             "zIndex": 21,
+            "id": "d94db922-ed8e-4ebc-a155-24ccff89dca7",
             "data": {
               "type": "tm.Store",
               "name": "Devices DB",
@@ -2061,8 +2071,8 @@
             },
             "visible": true,
             "shape": "store",
-            "id": "cced4b58-6852-495e-8924-5abd0e559709",
             "zIndex": 22,
+            "id": "cced4b58-6852-495e-8924-5abd0e559709",
             "data": {
               "type": "tm.Store",
               "name": "Geolocation DB",
@@ -2099,8 +2109,8 @@
             },
             "visible": true,
             "shape": "process",
-            "id": "22fd2eab-e798-4205-9969-e2428f3da905",
             "zIndex": 23,
+            "id": "22fd2eab-e798-4205-9969-e2428f3da905",
             "data": {
               "type": "tm.Process",
               "name": "Azure AD\n(Entra)",
@@ -2136,8 +2146,8 @@
             },
             "visible": true,
             "shape": "process",
-            "id": "29f44ba9-686c-492d-9c86-2742d22f8eb1",
             "zIndex": 24,
+            "id": "29f44ba9-686c-492d-9c86-2742d22f8eb1",
             "data": {
               "type": "tm.Process",
               "name": "Azure\nContainer\nRegistry",
@@ -2173,8 +2183,8 @@
             },
             "visible": true,
             "shape": "process",
-            "id": "55da1c30-c462-471c-a611-11cf0c40943a",
             "zIndex": 25,
+            "id": "55da1c30-c462-471c-a611-11cf0c40943a",
             "data": {
               "type": "tm.Process",
               "name": "Azure\nKey\nVault",
