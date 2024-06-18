@@ -6,7 +6,7 @@ Kubernetes high availability demo. A complete IoT platform based on 3 services a
 This project features three environments: Docker compose, Kubernetes and Azure AKS.
 ![What is this](diagrams/Docker_architecture.drawio.png)
 
-![What is this](diagrams/[Docker_architecture.drawio.png](https://github.com/MA3CIN/resilient-six/blob/main/diagrams/Kind_Architecture.drawio.png))
+![What is this](diagrams/Kind_Architecture.drawio.png)
 
 ![What is this](diagrams/ERSMS_AZURE.drawio.png)
 
