@@ -2,9 +2,17 @@
 
 Kubernetes high availability demo. A complete IoT platform based on 3 services and 3 MySQL databases, with scripts to run it locally (via docker compose), on a local K8s cluster or on a dynamically created Azure Kubernetes Service cluster.
 
+## Architecture
+This project features three environments: Docker compose, Kubernetes and Azure AKS.
+![What is this](diagrams/Docker_architecture.drawio.png)
+
+![What is this](diagrams/[Docker_architecture.drawio.png](https://github.com/MA3CIN/resilient-six/blob/main/diagrams/Kind_Architecture.drawio.png))
+
+![What is this](diagrams/ERSMS_AZURE.drawio.png)
+
 ## Running the project
 
-For services, refer to the **services** folder. K8s yaml files can be found in the **kubernetes** folder.
+For services, refer to the **services** folder. K8s yaml files can be found in the **kubernetes** folder. Azure cli scripts are located in the **aks** folder.
 
 ### vulnerability scanning
 
